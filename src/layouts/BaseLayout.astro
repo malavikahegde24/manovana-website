@@ -116,6 +116,17 @@ const ogImage = new URL(image, SITE.url).href;
       const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
       gsap.registerPlugin(ScrollTrigger);
 
+      // ---- Replay entrance animations on EVERY load/refresh ----
+      // 1) Don't let the browser restore scroll position — start at the top (or the hash),
+      //    so the reveal/hero animations always play in view.
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      if (!window.location.hash) window.scrollTo(0, 0);
+      // 2) If the page is restored from the back/forward cache (already animated),
+      //    reload so everything runs fresh.
+      window.addEventListener('pageshow', (e) => {
+        if (e.persisted) window.location.reload();
+      });
+
       // ---- Smooth scroll (lerp = continuous buttery smoothing) ----
       if (!reduced) {
         const lenis = new Lenis({

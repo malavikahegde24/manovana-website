@@ -29,7 +29,14 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# 3. Security headers for HTML documents
+# 3. HTML pages: always revalidate so a fresh deploy is never served stale.
+# (Hashed /_astro/* assets above are more specific and stay immutable.)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# 4. Security headers for HTML documents
 [[headers]]
   for = "/*"
   [headers.values]
