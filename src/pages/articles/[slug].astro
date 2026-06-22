@@ -1,0 +1,75 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/sections/PageHeader.astro';
+import FaqList from '../../components/sections/FaqList.astro';
+import CtaBand from '../../components/sections/CtaBand.astro';
+import { SITE } from '../../data/site';
+import { faqJsonLd, breadcrumbJsonLd, canonical } from '../../lib/seo';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles', ({ data }) => !data.draft);
+  return articles.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { data } = entry;
+const path = `/articles/${entry.id}`;
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: data.title,
+  description: data.metaDescription,
+  datePublished: data.publishDate.toISOString(),
+  dateModified: (data.updatedDate ?? data.publishDate).toISOString(),
+  author: { '@type': 'Person', name: SITE.coach },
+  publisher: { '@type': 'Organization', name: SITE.name },
+  mainEntityOfPage: canonical(path),
+};
+---
+
+<BaseLayout
+  title={data.metaTitle}
+  description={data.metaDescription}
+  path={path}
+  type="article"
+  jsonLd={[
+    articleJsonLd,
+    ...(data.faqs.length ? [faqJsonLd(data.faqs)] : []),
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Articles', path: '/articles' },
+      { name: data.title, path },
+    ]),
+  ]}
+>
+  <PageHeader
+    eyebrow="Article"
+    title={data.title}
+    crumbs={[
+      { name: 'Home', href: '/' },
+      { name: 'Articles', href: '/articles' },
+      { name: data.title, href: path },
+    ]}
+  />
+
+  <section class="container-content py-6">
+    <p class="text-sm text-ink-muted">
+      Published {fmt(data.publishDate)} · by {SITE.coach}
+    </p>
+    <article
+      class="mt-6 max-w-3xl prose-soft space-y-4 [&_a]:font-medium [&_a]:text-leaf-700 [&_a]:underline [&_blockquote]:border-l-4 [&_blockquote]:border-leaf-300 [&_blockquote]:pl-4 [&_blockquote]:font-serif [&_blockquote]:text-xl [&_blockquote]:italic [&_blockquote]:text-leaf-700 [&_h2]:mt-8 [&_h2]:font-serif [&_h2]:text-2xl [&_h2]:text-leaf-900 [&_ol]:list-decimal [&_ol]:space-y-2 [&_ol]:pl-6 [&_strong]:text-leaf-900 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-6"
+    >
+      <Content />
+    </article>
+  </section>
+
+  <FaqList faqs={data.faqs} />
+
+  <CtaBand />
+</BaseLayout>

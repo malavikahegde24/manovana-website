@@ -1,0 +1,578 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/sections/CtaBand.astro';
+import Icon from '../components/ui/Icon.astro';
+import Ornament from '../components/ui/Ornament.astro';
+import Avatar from '../components/ui/Avatar.astro';
+import { SITE, LINKS } from '../data/site';
+import { organizationJsonLd, personJsonLd } from '../lib/seo';
+
+const techniques = (await getCollection('techniques')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const concerns = (await getCollection('concerns')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const testimonials = (await getCollection('testimonials')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+const challenges = [
+  'Doing well outside, broken inside',
+  'A deep sense of emptiness',
+  'Stuck in negative thinking',
+  'Self-sabotaging patterns',
+  'Mood swings, loneliness & low moods',
+  'Entangled karmic relationships',
+  "Baggage therapy hasn't cleared",
+  'Striving with no inner happiness',
+];
+
+const services = [
+  {
+    title: '1-to-1 Coaching',
+    text: 'Deeply personalised sessions tailored to your journey. Available in Kannada & English.',
+    icon: 'heart',
+    n: '01',
+  },
+  {
+    title: 'Group Programs & Workshops',
+    text: 'Shared healing experiences that build community and connection.',
+    icon: 'users',
+    n: '02',
+  },
+  {
+    title: 'Corporate Programs',
+    text: 'Wellness initiatives designed for real organizational impact.',
+    icon: 'target',
+    n: '03',
+  },
+];
+
+const mindTruths = [
+  { lead: 'Mind is everything.', tail: 'What you think, you become.' },
+  { lead: 'Mind can make you', tail: 'or break you.' },
+  { lead: 'To the mind that is still,', tail: 'the whole universe surrenders.' },
+];
+
+const trust = [
+  { icon: 'heart', title: 'Confidential & judgement-free', sub: 'A safe, private space to open up' },
+  { icon: 'users', title: '18,000+ lives touched', sub: 'Across 1-to-1 sessions & groups' },
+  { icon: 'sprout', title: '30+ years of wisdom', sub: 'From a career in IT to inner healing' },
+  { icon: 'sparkles', title: 'A gentle complement', sub: 'Works alongside professional care' },
+];
+
+const beginSteps = [
+  { n: 'one', title: 'Reach out', text: 'Send a message or book a slot — share as much or as little as feels right.' },
+  { n: 'two', title: 'A gentle first conversation', text: 'We meet, you feel heard, and together we sense what you need.' },
+  { n: 'three', title: 'Your tailored path', text: 'Malavika weaves the right techniques into a journey that is yours alone.' },
+];
+---
+
+<BaseLayout
+  title="Manovana | Mind Coaching with Malavika Hegde"
+  description={SITE.description}
+  path="/"
+  jsonLd={[organizationJsonLd(), personJsonLd()]}
+>
+  <!-- ============ HERO ============ -->
+  <section class="relative min-h-[100svh] overflow-hidden">
+    <!-- realistic blossom image, anchored hard-right, feathered into the page -->
+    <div class="pointer-events-none absolute inset-y-0 right-0 w-full sm:w-[68%] lg:w-[56%]">
+      <img
+        src="/images/hero-blossom.jpg"
+        alt="Cherry blossoms in soft bloom against a clear sky — the Manovana Mind Garden"
+        width="1500"
+        height="993"
+        class="hero-mask h-full w-full object-cover object-[60%_center]"
+        fetchpriority="high"
+      />
+      <!-- drifting petals -->
+      <span class="petal" style="left:18%; animation-delay:0s"></span>
+      <span class="petal" style="left:34%; animation-delay:-6s"></span>
+      <span class="petal" style="left:52%; animation-delay:-11s"></span>
+      <span class="petal" style="left:68%; animation-delay:-3s"></span>
+      <span class="petal" style="left:82%; animation-delay:-8s"></span>
+      <span class="petal petal-sm" style="left:44%; animation-delay:-14s"></span>
+      <span class="petal petal-sm" style="left:74%; animation-delay:-17s"></span>
+    </div>
+
+    <!-- mobile readability scrim (image is full-width behind text on phones) -->
+    <div
+      class="pointer-events-none absolute inset-0 sm:hidden"
+      style="background:linear-gradient(90deg,#eef6ea 0%,rgba(238,246,234,0.92) 34%,rgba(238,246,234,0.35) 66%,transparent 100%)"
+      aria-hidden="true"
+    >
+    </div>
+
+    <div class="container-wide relative z-10 flex min-h-[100svh] items-center">
+      <div class="max-w-xl py-28">
+        <p class="eyebrow reveal">Mind Coach &amp; Counsellor · {SITE.region}</p>
+
+        <h1 class="display split-words mt-2 text-[3rem] leading-[1.02] sm:text-6xl lg:text-7xl">
+          Detox your mind.<br />Bloom your
+          <span class="italic font-medium text-leaf-500">Mind&nbsp;Garden.</span>
+        </h1>
+
+        <p class="prose-soft reveal mt-7 max-w-md text-xl">
+          Manovana helps minds heal, grow and bloom the flower of happiness, love and
+          peace — through a holistic blend of proven healing techniques.
+        </p>
+
+        <div class="reveal mt-8 flex flex-wrap items-center gap-3">
+          <a href={LINKS.bookingUrl} class="btn-primary" data-magnetic>Book a Session</a>
+          <a href="/about" class="btn-secondary" data-magnetic>Meet Malavika</a>
+        </div>
+
+        <!-- hero stat strip -->
+        <div class="reveal mt-14 flex flex-wrap items-center gap-x-8 gap-y-5 border-t border-leaf-200/70 pt-7">
+          <div>
+            <span class="block font-serif text-3xl font-semibold text-leaf-700 sm:text-4xl" data-count="18000" data-suffix="+">18,000+</span>
+            <span class="text-sm text-ink-muted">Lives impacted</span>
+          </div>
+          <div class="hidden h-9 w-px bg-leaf-200 sm:block"></div>
+          <div>
+            <span class="block font-serif text-3xl font-semibold text-leaf-700 sm:text-4xl" data-count="30" data-suffix="+ yrs">30+ yrs</span>
+            <span class="text-sm text-ink-muted">From IT to inner healing</span>
+          </div>
+          <div class="hidden h-9 w-px bg-leaf-200 sm:block"></div>
+          <div>
+            <span class="block font-serif text-3xl font-semibold text-leaf-700 sm:text-4xl" data-count="12" data-suffix="+">12+</span>
+            <span class="text-sm text-ink-muted">Healing modalities</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- scroll cue -->
+    <div class="absolute inset-x-0 bottom-6 z-10 flex justify-center">
+      <div class="flex flex-col items-center gap-2 text-xs uppercase tracking-[0.25em] text-leaf-500">
+        <span>Scroll</span>
+        <span class="h-10 w-px animate-pulse bg-leaf-300"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE MEANING — Mano + Vana (anchors 'mind' + the IT→Soul story) ============ -->
+  <section class="relative py-20 sm:py-28">
+    <div class="container-wide">
+      <div class="grid items-center gap-10 lg:grid-cols-[auto_1fr] lg:gap-16">
+        <div class="reveal mx-auto">
+          <img
+            src="/images/emblem.png"
+            alt="The Manovana emblem — a tree growing within a human mind"
+            width="208"
+            height="208"
+            class="h-44 w-44 animate-float lg:h-56 lg:w-56"
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <span class="eyebrow reveal">the meaning of Manovana</span>
+          <p class="reveal font-serif text-2xl italic leading-relaxed text-ink sm:text-[1.9rem]">
+            <span class="font-medium not-italic text-leaf-700">Mano</span>, the mind.
+            <span class="font-medium not-italic text-leaf-700">Vana</span>, a forest — a
+            garden. Manovana is the <span class="text-leaf-700">garden of your mind</span>:
+            a place to tend what hurts, and let happiness, love and peace bloom.
+          </p>
+          <p class="prose-soft reveal mt-6 max-w-xl">
+            Tended by <strong class="font-semibold text-leaf-700">Malavika Hegde</strong> —
+            who spent 30 years in IT before moving <em>from Systems to Souls, Logic to
+            Light</em> to become a Mind Coach &amp; Counsellor.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MIND TRUTHS ============ -->
+  <section id="truths" class="relative scroll-mt-24 overflow-hidden py-28 sm:py-40">
+    <!-- calm wash + faint tree-in-mind watermark (no blossom) -->
+    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-leaf-50 via-sky-100/40 to-leaf-100/70"></div>
+    <img
+      src="/images/emblem.png"
+      alt=""
+      aria-hidden="true"
+      class="pointer-events-none absolute left-1/2 top-1/2 -z-10 w-[460px] max-w-[78%] -translate-x-1/2 -translate-y-1/2 opacity-[0.06]"
+      loading="lazy"
+      data-parallax="0.08"
+    />
+
+    <div class="container-content text-center">
+      <Ornament class="mx-auto mb-6 h-11 w-11" />
+      <p class="reveal font-serif text-xl italic text-leaf-500">a gentle truth to begin</p>
+      <div class="mx-auto mt-10 max-w-3xl space-y-12">
+        {
+          mindTruths.map((m, i) => (
+            <div class="reveal">
+              <p class="font-serif text-[1.7rem] font-normal italic leading-snug text-ink sm:text-[2.4rem]">
+                {m.lead}{' '}
+                <span class="text-leaf-700 not-italic">{m.tail}</span>
+              </p>
+              {i < mindTruths.length - 1 && (
+                <div class="mx-auto mt-12 text-leaf-300" aria-hidden="true">✿</div>
+              )}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="relative py-20 sm:py-28">
+    <div class="container-wide">
+      <div class="grid items-center gap-14 lg:grid-cols-[0.9fr_1.1fr]">
+        <!-- portrait -->
+        <div class="reveal relative order-2 lg:order-1">
+          <div class="relative mx-auto aspect-[4/5] max-w-md overflow-hidden rounded-[2.5rem] border border-white/70 bg-gradient-to-br from-sky-100 via-cream to-leaf-100 shadow-[0_40px_90px_-40px_rgba(91,140,90,0.5)]">
+            <!-- TODO(asset): replace with Malavika's high-res profile photo -->
+            <div class="flex h-full flex-col items-center justify-center p-10 text-center" data-parallax="0.08">
+              <Ornament class="mb-4 h-10 w-10" />
+              <img src="/images/manovana-logo.png" alt="Manovana emblem — a tree growing within the human mind" width="170" height="170" class="h-40 w-40 object-contain" loading="lazy" />
+              <p class="mt-5 font-serif text-2xl text-leaf-900">Malavika Hegde</p>
+              <p class="text-sm italic text-ink-muted">{SITE.role}</p>
+            </div>
+          </div>
+        </div>
+        <!-- text -->
+        <div class="order-1 lg:order-2">
+          <span class="eyebrow reveal">meet your coach</span>
+          <h2 class="split-words section-title max-w-xl">
+            From Systems to Souls, Logic to Light.
+          </h2>
+          <div class="mt-7 space-y-5 prose-soft max-w-xl">
+            <p class="reveal">
+              An IT professional for over 30 years, Malavika Hegde made a transformative
+              shift into mind coaching — tuning into her soul-driven purpose to become a
+              Mind Coach and Counsellor.
+            </p>
+            <p class="reveal border-l-2 border-leaf-300 pl-5 font-serif text-2xl italic leading-snug text-leaf-700">
+              “I understand the silent struggles of people who display happiness and
+              success on the outside while carrying loads of pain from the inside.”
+            </p>
+          </div>
+          <a href="/about" class="btn-secondary reveal mt-9" data-magnetic>Read her story</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHO IS THIS FOR ============ -->
+  <section class="relative py-20 sm:py-28">
+    <div class="container-wide">
+      <div class="grid gap-12 lg:grid-cols-2">
+        <div>
+          <span class="eyebrow reveal">who is this for</span>
+          <h2 class="split-words section-title max-w-md">
+            For anyone carrying pain the world can't see.
+          </h2>
+        </div>
+        <div>
+          <p class="prose-soft reveal">
+            Anyone aged 18–80 — working professionals, homemakers and retired personnel.
+            Especially those who feel any of this:
+          </p>
+          <ul class="mt-6 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+            {
+              challenges.map((c) => (
+                <li class="reveal flex items-start gap-3 border-b border-leaf-100 pb-3 text-ink-soft">
+                  <Icon name="leaf" size={18} class="mt-1 shrink-0 text-leaf-500" />
+                  <span>{c}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRUST / REASSURANCE ============ -->
+  <section class="relative py-10 sm:py-14">
+    <div class="container-wide">
+      <div class="reveal rounded-[2.2rem] border border-leaf-100 bg-white/65 px-6 py-9 shadow-[0_18px_50px_-28px_rgba(91,140,90,0.35)] sm:px-10">
+        <p class="text-center font-serif text-xl italic text-leaf-700 sm:text-2xl">
+          You are in safe, experienced, and gentle hands.
+        </p>
+        <div class="mt-8 grid gap-x-8 gap-y-8 text-center sm:grid-cols-2 lg:grid-cols-4">
+          {
+            trust.map((t) => (
+              <div class="reveal flex flex-col items-center gap-2">
+                <span class="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-leaf-100 to-sky-100 text-leaf-700">
+                  <Icon name={t.icon} size={22} />
+                </span>
+                <span class="font-serif text-lg text-leaf-900">{t.title}</span>
+                <span class="text-xs leading-relaxed text-ink-muted">{t.sub}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHAT I HELP WITH ============ -->
+  <section id="help-with" class="relative scroll-mt-24 py-20 sm:py-28">
+    <div class="container-wide">
+      <div class="reveal mx-auto max-w-2xl text-center">
+        <Ornament class="mx-auto mb-4 h-10 w-10" />
+        <span class="eyebrow justify-center">how I help</span>
+        <h2 class="section-title">
+          Guiding you towards clarity, peace and emotional freedom.
+        </h2>
+      </div>
+      <!-- a winding garden path: each concern is a bloom along the vine -->
+      <div class="relative mx-auto mt-16 max-w-3xl">
+        <span
+          class="vine absolute left-[26px] top-3 bottom-3 w-[2px] md:left-1/2 md:-translate-x-1/2"
+          aria-hidden="true"
+        ></span>
+        <ul class="space-y-12 md:space-y-16">
+          {
+            concerns.map((c, i) => {
+              const left = i % 2 === 0;
+              return (
+                <li class="reveal relative">
+                  <span class="absolute left-[26px] top-0 z-10 flex h-[52px] w-[52px] -translate-x-1/2 items-center justify-center rounded-full border border-leaf-100 bg-white text-leaf-700 shadow-[0_8px_22px_-10px_rgba(91,140,90,0.5)] md:left-1/2">
+                    <Icon name={c.data.icon} size={22} />
+                  </span>
+                  <a
+                    href={`/concerns/${c.id}`}
+                    class:list={[
+                      'group block pl-20 md:w-[46%] md:pl-0',
+                      left ? 'md:pr-12 md:text-right' : 'md:ml-auto md:pl-12 md:text-left',
+                    ]}
+                  >
+                    <h3 class="font-serif text-[1.7rem] italic leading-tight text-leaf-900 transition-colors group-hover:text-leaf-500 sm:text-3xl">
+                      {c.data.title}
+                    </h3>
+                    <p class="mt-2 leading-relaxed text-ink-soft">{c.data.summary}</p>
+                    <span class:list={['mt-3 inline-flex items-center gap-2 text-sm font-semibold text-leaf-500', left && 'md:flex-row-reverse']}>
+                      Explore
+                      <span aria-hidden="true">✿</span>
+                    </span>
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ APPROACH (04) — a garland of techniques ============ -->
+  <section id="approach" class="relative scroll-mt-24 py-24 sm:py-32">
+    <div class="container-content text-center">
+      <Ornament class="mx-auto mb-4 h-10 w-10" />
+      <span class="eyebrow justify-center">my approach</span>
+      <h2 class="section-title mx-auto max-w-2xl">
+        A holistic blend of proven healing techniques.
+      </h2>
+      <p class="prose-soft reveal mx-auto mt-5 max-w-xl">
+        No single tool fits every mind. Malavika weaves these modalities together,
+        tailored gently to you.
+      </p>
+
+      <!-- a playful bouquet of techniques — soft tinted petals, gently scattered -->
+      <div class="reveal mx-auto mt-12 flex max-w-3xl flex-wrap items-center justify-center gap-3">
+        {
+          techniques.map((t, i) => {
+            const tints = [
+              'bg-[#f7dde6]',
+              'bg-sky-100',
+              'bg-[#eef3da]',
+              'bg-[#f7ecce]',
+              'bg-leaf-100',
+            ];
+            const rots = [-3, 2, -2, 3, -1, 2, -3, 1, -2, 3];
+            return (
+              <a
+                href={`/techniques/${t.id}`}
+                class={`petal-chip ${tints[i % tints.length]}`}
+                style={`--rot:${rots[i % rots.length]}deg`}
+              >
+                <span class="text-leaf-500" aria-hidden="true">✿</span>
+                {t.data.shortTitle ?? t.data.title}
+              </a>
+            );
+          })
+        }
+      </div>
+
+      <a href="/approach" class="btn-secondary reveal mt-12" data-magnetic>
+        Explore the full approach
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="relative py-20 sm:py-28">
+    <div class="container-wide">
+      <div class="reveal mx-auto max-w-2xl text-center">
+        <Ornament class="mx-auto mb-4 h-10 w-10" />
+        <span class="eyebrow justify-center">ways to work together</span>
+        <h2 class="section-title">Gentle, guided paths to healing.</h2>
+      </div>
+      <!-- calm medallions: gradient orb + delicate rotating seed-dot halo + crisp icon -->
+      <div class="mt-16 grid gap-12 sm:grid-cols-3 sm:gap-8">
+        {
+          services.map((s, i) => {
+            const tints = [
+              'from-[#f8e2ea] via-white to-leaf-50',
+              'from-sky-100 via-white to-leaf-50',
+              'from-[#f8efd6] via-white to-leaf-50',
+            ];
+            return (
+              <a href="/services" class="reveal group block text-center">
+                <div class={`relative mx-auto aspect-square max-w-[210px] rounded-full bg-gradient-to-br ${tints[i % tints.length]} shadow-[0_34px_74px_-36px_rgba(91,140,90,0.55)] ring-1 ring-inset ring-white/60 transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-[0_44px_88px_-38px_rgba(91,140,90,0.62)]`}>
+                  <svg viewBox="0 0 100 100" aria-hidden="true" class="ring-spin absolute inset-0 h-full w-full text-leaf-300">
+                    <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="0.4 4.6" stroke-linecap="round" />
+                    <circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="0.3" opacity="0.5" />
+                  </svg>
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <span class="flex h-[82px] w-[82px] items-center justify-center rounded-full bg-white/85 text-leaf-700 shadow-[0_10px_26px_-12px_rgba(91,140,90,0.6)] backdrop-blur-sm transition-transform duration-500 group-hover:scale-105">
+                      <Icon name={s.icon} size={34} />
+                    </span>
+                  </div>
+                </div>
+                <h3 class="mt-7 font-serif text-2xl italic text-leaf-900 transition-colors group-hover:text-leaf-500">{s.title}</h3>
+                <p class="mx-auto mt-2 max-w-xs leading-relaxed text-ink-soft">{s.text}</p>
+              </a>
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section class="relative py-20 sm:py-28">
+    <div class="container-wide">
+      <div class="reveal mx-auto max-w-2xl text-center">
+        <Ornament class="mx-auto mb-4 h-10 w-10" />
+        <span class="eyebrow justify-center">words from the heart</span>
+        <h2 class="section-title">Real reflections from real sessions.</h2>
+      </div>
+
+      <!-- gently scattered "petal notes" — like handwritten cards in a journal -->
+      <div class="reveal mx-auto mt-14 max-w-5xl gap-5 sm:columns-2 lg:columns-3">
+        {
+          testimonials.map((t, i) => {
+            const tints = [
+              'bg-[#f7dde6]/70',
+              'bg-sky-100/70',
+              'bg-[#f7ecce]/70',
+              'bg-leaf-100/70',
+              'bg-white/80',
+            ];
+            const rots = [-2, 1.5, -1.2, 2, -1.6, 1, -2, 1.4];
+            const big = i === 0;
+            return (
+              <figure
+                class={`note mb-5 break-inside-avoid rounded-[1.6rem] border border-white/70 p-6 shadow-[0_14px_40px_-22px_rgba(91,140,90,0.4)] ${tints[i % tints.length]} ${big ? 'sm:p-8' : ''}`}
+                style={`--rot:${rots[i % rots.length]}deg`}
+              >
+                <span class="font-serif text-4xl leading-none text-leaf-300">“</span>
+                <blockquote class={`-mt-3 font-serif italic leading-snug text-ink ${big ? 'text-2xl' : 'text-lg'}`}>
+                  {t.data.quote}
+                </blockquote>
+                <figcaption class="mt-5 flex items-center gap-3">
+                  <Avatar name={t.data.name} image={t.data.image} />
+                  <span>
+                    <span class="block text-sm font-semibold text-leaf-900">{t.data.name}</span>
+                    {t.data.context && <span class="block text-xs italic text-ink-muted">{t.data.context}</span>}
+                  </span>
+                </figcaption>
+              </figure>
+            );
+          })
+        }
+      </div>
+
+      <div class="mt-12 text-center">
+        <a href="/testimonials" class="btn-secondary" data-magnetic>Read more reflections</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW WE BEGIN ============ -->
+  <section class="relative py-20 sm:py-28">
+    <div class="container-wide">
+      <div class="reveal mx-auto max-w-2xl text-center">
+        <Ornament class="mx-auto mb-4 h-10 w-10" />
+        <span class="eyebrow justify-center">how we begin</span>
+        <h2 class="section-title">Starting is gentler than you think.</h2>
+      </div>
+      <div class="relative mx-auto mt-16 grid max-w-4xl gap-12 sm:grid-cols-3 sm:gap-8">
+        <span class="vine absolute left-0 right-0 top-7 hidden h-[2px] w-full sm:block" aria-hidden="true"></span>
+        {
+          beginSteps.map((step) => (
+            <div class="reveal relative text-center">
+              <span class="relative z-10 mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-leaf-100 bg-white font-serif text-lg italic text-leaf-700 shadow-[0_10px_24px_-12px_rgba(91,140,90,0.5)]">
+                {step.n}
+              </span>
+              <h3 class="mt-6 font-serif text-2xl italic text-leaf-900">{step.title}</h3>
+              <p class="mx-auto mt-2 max-w-xs leading-relaxed text-ink-soft">{step.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LEAD MAGNET — gentle first gift ============ -->
+  <section class="relative py-12 sm:py-16">
+    <div class="container-content">
+      <div class="reveal relative overflow-hidden rounded-[2.2rem] border border-leaf-100 bg-white/70 px-6 py-12 text-center shadow-[0_22px_60px_-32px_rgba(91,140,90,0.4)] sm:px-12">
+        <img
+          src="/images/emblem.png"
+          alt=""
+          aria-hidden="true"
+          class="pointer-events-none absolute -right-10 -top-10 w-44 opacity-[0.08]"
+          loading="lazy"
+        />
+        <div class="relative mx-auto max-w-xl">
+          <span class="eyebrow justify-center">a gift to begin</span>
+          <h2 class="font-serif text-3xl text-leaf-900 sm:text-4xl">
+            Detox Your Mind — a free guided practice
+          </h2>
+          <p class="prose-soft mt-4">
+            A short practice to quieten a racing mind and return to calm. Leave your email
+            and Malavika will send it to you.
+          </p>
+          <!-- Netlify form — TODO(asset): attach the real guided-practice file/link on send -->
+          <form
+            name="freebie"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            action="/thank-you"
+            class="mx-auto mt-7 flex max-w-md flex-col gap-3 sm:flex-row"
+          >
+            <input type="hidden" name="form-name" value="freebie" />
+            <p class="hidden">
+              <label>Leave blank if human: <input name="bot-field" /></label>
+            </p>
+            <label class="sr-only" for="freebie-email">Your email</label>
+            <input
+              id="freebie-email"
+              name="email"
+              type="email"
+              required
+              autocomplete="email"
+              placeholder="you@email.com"
+              class="flex-1 rounded-full border border-leaf-100 bg-white px-5 py-3 text-ink outline-none focus:border-leaf-500"
+            />
+            <button type="submit" class="btn-primary whitespace-nowrap">Send it to me</button>
+          </form>
+          <p class="mt-3 text-xs text-ink-muted">No spam, ever. Just a gentle step inward.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

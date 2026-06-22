@@ -1,0 +1,68 @@
+{
+  "$ref": "#/definitions/concerns",
+  "definitions": {
+    "concerns": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "metaTitle": {
+          "type": "string"
+        },
+        "metaDescription": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string",
+          "default": "heart"
+        },
+        "relatedTechniques": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "order": {
+          "type": "number",
+          "default": 99
+        },
+        "faqs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              },
+              "answer": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "question",
+              "answer"
+            ],
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "summary",
+        "metaTitle",
+        "metaDescription"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

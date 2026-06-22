@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/ui/Ornament.astro';
+---
+
+<BaseLayout
+  title="Thank You — Your Gift Is On Its Way | Manovana"
+  description="Thank you for subscribing. Your free guided practice from Manovana is on its way to your inbox."
+  path="/thank-you"
+  noindex={true}
+>
+  <section class="container-content flex min-h-[70vh] flex-col items-center justify-center py-32 text-center">
+    <Ornament class="mb-6 h-14 w-14" />
+    <h1 class="font-serif text-4xl text-leaf-900">It's on its way 🌿</h1>
+    <p class="prose-soft mx-auto mt-4 max-w-lg">
+      Thank you for taking this gentle first step. Your guided practice will reach your
+      inbox shortly. When you're ready for more, Malavika is here.
+    </p>
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+      <a href="/" class="btn-primary" data-magnetic>Back to Home</a>
+      <a href="/about" class="btn-secondary" data-magnetic>Meet Malavika</a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/sections/PageHeader.astro';
+import CtaBand from '../components/sections/CtaBand.astro';
+import Icon from '../components/ui/Icon.astro';
+import { SITE } from '../data/site';
+import { personJsonLd, breadcrumbJsonLd } from '../lib/seo';
+
+const milestones = [
+  {
+    title: '30+ years in IT',
+    text: 'Three decades as an IT professional — structured, logical, results-driven.',
+    icon: 'git-branch',
+  },
+  {
+    title: 'The inner shift',
+    text: 'A transformative move from Systems to Souls, Logic to Light — aligning with her true life purpose.',
+    icon: 'sprout',
+  },
+  {
+    title: 'Mind Coach & Counsellor',
+    text: 'Trained in a holistic blend of healing modalities to guide others home to themselves.',
+    icon: 'heart',
+  },
+  {
+    title: `${SITE.peopleImpacted} lives impacted`,
+    text: 'Through both 1-to-1 and group sessions — with 1-to-1 coaching available in Kannada & English.',
+    icon: 'users',
+  },
+];
+---
+
+<BaseLayout
+  title="About Malavika Hegde — Mind Coach | Manovana"
+  description="Meet Malavika Hegde — an IT professional of 30+ years turned Mind Coach who has helped 18,000+ people heal, grow and find inner peace. Her story and approach."
+  path="/about"
+  type="profile"
+  jsonLd={[
+    personJsonLd(),
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'About', path: '/about' },
+    ]),
+  ]}
+>
+  <PageHeader
+    eyebrow="About Your Coach"
+    title="From Systems to Souls"
+    subtitle="The story behind Manovana, and the woman guiding your journey inward."
+    crumbs={[
+      { name: 'Home', href: '/' },
+      { name: 'About', href: '/about' },
+    ]}
+  />
+
+  <section class="container-content py-10">
+    <div class="grid items-start gap-12 lg:grid-cols-5">
+      <div class="lg:col-span-3">
+        <div class="prose-soft space-y-5">
+          <p>
+            An IT professional for over <strong>30 years</strong>, Malavika Hegde made a
+            transformative shift into mind coaching — aligning with her true life
+            purpose.
+          </p>
+          <p class="font-serif text-2xl italic leading-snug text-leaf-700">
+            “Moving from Systems to Souls… Logic to Light… Tuning into my soul-driven
+            purpose… I became a Mind Coach and Counsellor.”
+          </p>
+          <p>
+            As a dedicated Mind Coach, she has helped over {SITE.peopleImpacted} individuals
+            discover inner peace, break free from limiting thought and emotional patterns,
+            and embrace a life of clarity and fulfilment.
+          </p>
+          <p>
+            “I understand the silent struggles of people who display happiness and success
+            on the outside while carrying loads of pain from the inside.”
+          </p>
+          <p>
+            That understanding is the heart of Manovana — a Sanskrit-rooted name meaning a
+            <em>garden of the mind</em>. Her work helps minds heal, grow and bloom the
+            flower of happiness, love and peace, using a holistic blend of proven healing
+            techniques.
+          </p>
+        </div>
+      </div>
+
+      <aside class="lg:col-span-2">
+        <div
+          class="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-leaf-100 bg-gradient-to-br from-sky-100 via-cream to-leaf-100 shadow-md"
+        >
+          <!-- TODO(asset): replace with Malavika's high-res profile photo -->
+          <div class="flex h-full flex-col items-center justify-center p-8 text-center">
+            <img
+              src="/images/manovana-logo.png"
+              alt="Manovana emblem — a tree growing within the human mind"
+              width="180"
+              height="180"
+              class="h-44 w-44 object-contain"
+              loading="lazy"
+            />
+            <p class="mt-6 font-serif text-xl text-leaf-900">Malavika Hegde</p>
+            <p class="text-sm text-ink-muted">{SITE.role}</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="container-content py-12">
+    <h2 class="section-title mb-10">Her journey</h2>
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        milestones.map((m) => (
+          <div class="card reveal">
+            <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-leaf-100 text-leaf-700">
+              <Icon name={m.icon} size={22} />
+            </div>
+            <h3 class="font-serif text-lg text-leaf-900">{m.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-soft">{m.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Begin your healing journey"
+    text="If her story resonates, the next gentle step is a simple conversation."
+  />
+</BaseLayout>

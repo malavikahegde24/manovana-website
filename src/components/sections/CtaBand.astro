@@ -1,0 +1,62 @@
+---
+import { LINKS, SITE } from '../../data/site';
+import Ornament from '../ui/Ornament.astro';
+interface Props {
+  heading?: string;
+  text?: string;
+}
+const {
+  heading = 'Ready to bloom your Mind Garden?',
+  text = 'Take the first gentle step toward inner peace, clarity and emotional freedom.',
+} = Astro.props;
+---
+
+<section class="container-content py-20 sm:py-28">
+  <div
+    class="reveal relative overflow-hidden rounded-[2.5rem] px-6 py-16 text-center shadow-[0_40px_90px_-40px_rgba(34,56,44,0.7)] sm:px-12 sm:py-24"
+  >
+    <!-- deep, calm green with the tree-in-mind emblem glowing through -->
+    <div
+      class="absolute inset-0"
+      style="background:radial-gradient(120% 120% at 80% 10%, #2f4a3c 0%, #284036 55%, #22382c 100%)"
+      aria-hidden="true"
+    >
+    </div>
+    <img
+      src="/images/emblem.png"
+      alt=""
+      aria-hidden="true"
+      class="pointer-events-none absolute -right-16 -bottom-20 w-[420px] max-w-[60%] opacity-[0.12]"
+      loading="lazy"
+    />
+    <div
+      class="pointer-events-none absolute -left-10 -top-12 h-56 w-56 rounded-full bg-leaf-500/25 blur-3xl"
+      aria-hidden="true"
+    >
+    </div>
+
+    <!-- drifting petals over the band -->
+    <span class="petal" style="left:14%; animation-delay:-4s"></span>
+    <span class="petal petal-sm" style="left:30%; animation-delay:-12s"></span>
+    <span class="petal petal-sm" style="left:78%; animation-delay:-7s"></span>
+    <span class="petal" style="left:90%; animation-delay:-15s"></span>
+
+    <div class="relative">
+      <Ornament class="mx-auto mb-5 h-11 w-11 text-leaf-200" />
+      <h2 class="mx-auto max-w-2xl font-serif text-3xl text-white sm:text-[2.7rem]">
+        {heading}
+      </h2>
+      <p class="mx-auto mt-4 max-w-xl text-lg italic text-cream/85">{text}</p>
+      <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href={LINKS.bookingUrl} class="btn bg-white text-leaf-700 hover:bg-cream" data-magnetic
+          >Book a Session</a
+        >
+        <a
+          href={`mailto:${SITE.email}`}
+          class="btn border border-white/40 text-white hover:bg-white/10"
+          data-magnetic>Email Malavika</a
+        >
+      </div>
+    </div>
+  </div>
+</section>

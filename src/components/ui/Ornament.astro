@@ -1,0 +1,24 @@
+---
+/**
+ * Small six-petal bloom — a soft, spiritual section ornament.
+ * Gently "breathes" (scale) unless reduced-motion.
+ */
+interface Props {
+  class?: string;
+  breathe?: boolean;
+}
+const { class: className = '', breathe = true } = Astro.props;
+const rot = [0, 60, 120, 180, 240, 300];
+---
+
+<svg
+  viewBox="0 0 24 24"
+  class:list={['text-leaf-300', breathe && 'ornament-breathe', className]}
+  fill="currentColor"
+  aria-hidden="true"
+>
+  <g opacity="0.9">
+    {rot.map((r) => <ellipse cx="12" cy="6.6" rx="1.7" ry="4" transform={`rotate(${r} 12 12)`} />)}
+  </g>
+  <circle cx="12" cy="12" r="2.1" fill="#fbf3e8"></circle>
+</svg>

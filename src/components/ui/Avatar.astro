@@ -1,0 +1,39 @@
+---
+/**
+ * Testimonial avatar. Uses a real image when provided, otherwise a tasteful
+ * initials placeholder. TODO(asset): pass `image` once client photos arrive.
+ */
+interface Props {
+  name: string;
+  image?: string;
+  class?: string;
+}
+const { name, image, class: className = '' } = Astro.props;
+const initials = name
+  .split(' ')
+  .map((w) => w[0])
+  .filter(Boolean)
+  .slice(0, 2)
+  .join('')
+  .toUpperCase();
+---
+
+{
+  image ? (
+    <img
+      src={image}
+      alt={`Photo of ${name}`}
+      width="48"
+      height="48"
+      loading="lazy"
+      class={`h-12 w-12 rounded-full object-cover ${className}`}
+    />
+  ) : (
+    <span
+      class={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-leaf-300 to-sky-300 font-serif text-sm font-semibold text-leaf-900 ${className}`}
+      aria-hidden="true"
+    >
+      {initials}
+    </span>
+  )
+}

@@ -1,0 +1,28 @@
+---
+interface Props {
+  faqs: { question: string; answer: string }[];
+  heading?: string;
+}
+const { faqs, heading = 'Frequently asked questions' } = Astro.props;
+---
+
+{
+  faqs.length > 0 && (
+    <section class="container-content py-12">
+      <h2 class="section-title mb-8">{heading}</h2>
+      <div class="mx-auto max-w-3xl divide-y divide-leaf-100 rounded-2xl border border-leaf-100 bg-white/70">
+        {faqs.map((f) => (
+          <details class="group p-5">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-leaf-900">
+              {f.question}
+              <span class="text-leaf-500 transition-transform group-open:rotate-45" aria-hidden="true">
+                +
+              </span>
+            </summary>
+            <p class="mt-3 text-ink-soft">{f.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  )
+}

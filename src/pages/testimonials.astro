@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/sections/PageHeader.astro';
+import TestimonialCard from '../components/sections/TestimonialCard.astro';
+import CtaBand from '../components/sections/CtaBand.astro';
+import { SITE } from '../data/site';
+import { breadcrumbJsonLd } from '../lib/seo';
+
+const testimonials = (await getCollection('testimonials')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<BaseLayout
+  title="Testimonials — What Clients Say | Manovana"
+  description="Real words from participants of Malavika Hegde's mind-coaching sessions and workshops — refreshing, insightful and genuinely impactful."
+  path="/testimonials"
+  jsonLd={[
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Testimonials', path: '/testimonials' },
+    ]),
+  ]}
+>
+  <PageHeader
+    eyebrow="What My Clients Say"
+    title="Real words from real sessions"
+    subtitle={`Across ${SITE.peopleImpacted} lives touched through group and one-to-one sessions, a few reflections from those who attended.`}
+    crumbs={[
+      { name: 'Home', href: '/' },
+      { name: 'Testimonials', href: '/testimonials' },
+    ]}
+  />
+
+  <section class="container-content py-10">
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        testimonials.map((t) => (
+          <div class="reveal">
+            <TestimonialCard
+              name={t.data.name}
+              context={t.data.context}
+              quote={t.data.quote}
+              image={t.data.image}
+            />
+          </div>
+        ))
+      }
+    </div>
+    <!-- TODO(asset): add 2–3 named testimonials with client photos when provided. -->
+    <p class="mt-8 text-center text-sm text-ink-muted">
+      Testimonials are shared from real sessions. Names are withheld to respect client
+      privacy.
+    </p>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

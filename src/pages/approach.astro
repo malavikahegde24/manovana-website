@@ -1,0 +1,62 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/sections/PageHeader.astro';
+import CtaBand from '../components/sections/CtaBand.astro';
+import Icon from '../components/ui/Icon.astro';
+import { breadcrumbJsonLd } from '../lib/seo';
+
+const techniques = (await getCollection('techniques')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<BaseLayout
+  title="My Approach — Healing Techniques | Manovana"
+  description="A holistic blend of proven healing techniques used by Mind Coach Malavika Hegde — meditation, NLP, hypnotherapy, EFT, past life regression and more."
+  path="/approach"
+  jsonLd={[
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'My Approach', path: '/approach' },
+    ]),
+  ]}
+>
+  <PageHeader
+    eyebrow="My Approach"
+    title="A holistic blend of proven healing techniques"
+    subtitle="Every mind is different. Rather than forcing one method, Malavika draws on a wide toolkit and tailors the work to you."
+    crumbs={[
+      { name: 'Home', href: '/' },
+      { name: 'My Approach', href: '/approach' },
+    ]}
+  />
+
+  <section class="container-content py-10">
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        techniques.map((t) => (
+          <a href={`/techniques/${t.id}`} class="card reveal group flex flex-col">
+            <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-leaf-100 text-leaf-700">
+              <Icon name={t.data.icon} size={22} />
+            </div>
+            <h2 class="font-serif text-xl text-leaf-900 group-hover:text-leaf-700">
+              {t.data.title}
+            </h2>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">
+              {t.data.summary}
+            </p>
+            <span class="mt-4 inline-block text-sm font-semibold text-leaf-500">
+              Learn more →
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Find the right path for your mind"
+    text="Unsure which approach fits you? That's exactly what a first conversation is for."
+  />
+</BaseLayout>

@@ -1,0 +1,22 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  align?: 'center' | 'left';
+  as?: 'h1' | 'h2';
+}
+const { eyebrow, title, subtitle, align = 'center', as = 'h2' } = Astro.props;
+const Tag = as;
+---
+
+<div
+  class:list={[
+    'reveal max-w-2xl',
+    align === 'center' ? 'mx-auto text-center' : 'text-left',
+  ]}
+>
+  {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+  <Tag class="section-title">{title}</Tag>
+  {subtitle && <p class="prose-soft mt-4">{subtitle}</p>}
+</div>

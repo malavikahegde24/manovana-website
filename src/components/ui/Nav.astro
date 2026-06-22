@@ -1,0 +1,152 @@
+---
+import { NAV, SITE, LINKS } from '../../data/site';
+const current = Astro.url.pathname;
+const isActive = (href: string) =>
+  href.startsWith('/#')
+    ? current === '/'
+    : href === '/'
+      ? current === '/'
+      : current.startsWith(href);
+---
+
+<header
+  id="site-header"
+  class="fixed inset-x-0 top-0 z-40 transition-all duration-300"
+  data-nav
+>
+  <nav
+    class="container-wide flex items-center justify-between gap-6 py-4"
+    aria-label="Primary"
+  >
+    <a href="/" class="flex shrink-0 items-center gap-2.5" aria-label={`${SITE.name} home`}>
+      <img
+        src="/images/manovana-logo.png"
+        alt="Manovana logo — a tree growing within a human mind"
+        width="40"
+        height="40"
+        class="h-10 w-10 object-contain"
+        loading="eager"
+      />
+      <span class="font-serif text-2xl font-medium tracking-tight text-leaf-900">Manovana</span>
+    </a>
+
+    <ul class="hidden items-center gap-x-8 lg:flex">
+      {
+        NAV.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={[
+                'relative whitespace-nowrap text-[0.92rem] text-ink-soft transition-colors hover:text-leaf-700',
+                isActive(item.href) && 'text-leaf-700',
+              ]}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="hidden shrink-0 lg:block">
+      <a href={LINKS.bookingUrl} class="btn-primary whitespace-nowrap px-6 py-2.5 text-sm" data-magnetic>Book a Session</a>
+    </div>
+
+    <button
+      type="button"
+      class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-leaf-200/60 bg-white/70 text-leaf-700 lg:hidden"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-drawer"
+      data-menu-toggle
+    >
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <div
+    id="mobile-drawer"
+    class="invisible fixed inset-0 z-50 opacity-0 transition-opacity duration-300 lg:hidden"
+    data-drawer
+  >
+    <div class="absolute inset-0 bg-leaf-900/40 backdrop-blur-sm" data-drawer-overlay></div>
+    <div
+      class="absolute right-0 top-0 flex h-full w-[82%] max-w-sm translate-x-full flex-col gap-2 bg-cream p-6 shadow-xl transition-transform duration-300"
+      data-drawer-panel
+    >
+      <div class="mb-4 flex items-center justify-between">
+        <span class="font-serif text-lg font-semibold text-leaf-900">Menu</span>
+        <button
+          type="button"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-leaf-200/60 text-leaf-700"
+          aria-label="Close menu"
+          data-menu-close
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      {
+        NAV.map((item) => (
+          <a
+            href={item.href}
+            class="rounded-xl px-3 py-3 text-base font-medium text-ink-soft hover:bg-leaf-100/60 hover:text-leaf-700"
+            data-drawer-link
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a href={LINKS.bookingUrl} class="btn-primary mt-4">Book a Session</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector('[data-nav]');
+  const drawer = document.querySelector<HTMLElement>('[data-drawer]');
+  const panel = document.querySelector<HTMLElement>('[data-drawer-panel]');
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const closeEls = document.querySelectorAll(
+    '[data-menu-close], [data-drawer-overlay], [data-drawer-link]',
+  );
+
+  // Solidify header background after scrolling a little
+  const onScroll = () => {
+    if (!header) return;
+    if (window.scrollY > 24) {
+      header.classList.add('bg-cream/85', 'shadow-sm', 'backdrop-blur-md');
+    } else {
+      header.classList.remove('bg-cream/85', 'shadow-sm', 'backdrop-blur-md');
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const openDrawer = () => {
+    drawer?.classList.remove('invisible', 'opacity-0');
+    panel?.classList.remove('translate-x-full');
+    toggle?.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  };
+  const closeDrawer = () => {
+    panel?.classList.add('translate-x-full');
+    drawer?.classList.add('opacity-0');
+    toggle?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    window.setTimeout(() => drawer?.classList.add('invisible'), 300);
+  };
+  toggle?.addEventListener('click', openDrawer);
+  closeEls.forEach((el) => el.addEventListener('click', closeDrawer));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDrawer();
+  });
+</script>

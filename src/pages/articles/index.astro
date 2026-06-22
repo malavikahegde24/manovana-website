@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/sections/PageHeader.astro';
+import CtaBand from '../../components/sections/CtaBand.astro';
+import { breadcrumbJsonLd } from '../../lib/seo';
+
+const articles = (await getCollection('articles', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout
+  title="Articles & Insights on Mind Healing | Manovana"
+  description="Articles by Mind Coach Malavika Hegde on inner healing, emotional wellbeing, mind coaching and finding peace — clear answers to the questions people ask most."
+  path="/articles"
+  jsonLd={[
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Articles', path: '/articles' },
+    ]),
+  ]}
+>
+  <PageHeader
+    eyebrow="Articles & Insights"
+    title="Gentle wisdom for the journey inward"
+    subtitle="Clear, honest answers to the questions people ask most about the mind, healing and inner peace."
+    crumbs={[
+      { name: 'Home', href: '/' },
+      { name: 'Articles', href: '/articles' },
+    ]}
+  />
+
+  <section class="container-content py-10">
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {
+        articles.map((a) => (
+          <a href={`/articles/${a.id}`} class="card reveal group flex flex-col">
+            <time datetime={a.data.publishDate.toISOString()} class="text-xs text-ink-muted">
+              {fmt(a.data.publishDate)}
+            </time>
+            <h2 class="mt-2 font-serif text-xl leading-snug text-leaf-900 group-hover:text-leaf-700">
+              {a.data.title}
+            </h2>
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-ink-soft">{a.data.excerpt}</p>
+            <span class="mt-4 inline-block text-sm font-semibold text-leaf-500">
+              Read article →
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

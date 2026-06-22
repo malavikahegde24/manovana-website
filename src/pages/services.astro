@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/sections/PageHeader.astro';
+import CtaBand from '../components/sections/CtaBand.astro';
+import Icon from '../components/ui/Icon.astro';
+import { LINKS, SITE } from '../data/site';
+import { serviceJsonLd, breadcrumbJsonLd } from '../lib/seo';
+
+const services = [
+  {
+    title: '1-to-1 Coaching',
+    icon: 'heart',
+    text: 'Deeply personalised sessions tailored to your unique journey. We work one-on-one to heal what is holding you back and build the inner life you long for — at your pace, in a safe and confidential space.',
+    points: [
+      'Fully tailored to your needs and goals',
+      'Private, confidential and judgement-free',
+      'Available in Kannada & English',
+    ],
+  },
+  {
+    title: 'Group Programs & Workshops',
+    icon: 'users',
+    text: 'Shared healing experiences that build community. Group sessions create a supportive space where participants heal alongside others, often discovering they are far from alone in their struggles.',
+    points: [
+      'Supportive, community-led healing',
+      'Practical techniques you can use immediately',
+      'Ideal for shared learning and connection',
+    ],
+  },
+  {
+    title: 'Corporate Programs',
+    icon: 'target',
+    text: 'Wellness initiatives designed for organizational impact. Equip teams with practical tools to manage stress, regulate emotions and work with greater clarity and resilience.',
+    points: [
+      'Tailored to your organisation’s needs',
+      'Stress, emotional wellbeing and resilience',
+      'Measurable impact on team wellbeing',
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Services — Mind Coaching with Malavika Hegde | Manovana"
+  description="Explore Manovana's mind-coaching services: 1-to-1 coaching (in Kannada & English), group programs & workshops, and corporate wellness programs by Malavika Hegde."
+  path="/services"
+  jsonLd={[
+    serviceJsonLd({
+      name: 'Mind Coaching Services',
+      description:
+        '1-to-1 coaching, group programs & workshops, and corporate wellness programs by Malavika Hegde.',
+      path: '/services',
+    }),
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Services', path: '/services' },
+    ]),
+  ]}
+>
+  <PageHeader
+    eyebrow="Services"
+    title="Ways we can work together"
+    subtitle="Whether you prefer the depth of one-to-one work or the warmth of a group, there is a path for you."
+    crumbs={[
+      { name: 'Home', href: '/' },
+      { name: 'Services', href: '/services' },
+    ]}
+  />
+
+  <section class="container-content py-10">
+    <div class="grid gap-6 lg:grid-cols-2">
+      {
+        services.map((s) => (
+          <article class="card reveal flex flex-col">
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-leaf-100 text-leaf-700">
+              <Icon name={s.icon} size={24} />
+            </div>
+            <h2 class="font-serif text-2xl text-leaf-900">{s.title}</h2>
+            <p class="mt-3 text-ink-soft">{s.text}</p>
+            <ul class="mt-5 space-y-2">
+              {s.points.map((p) => (
+                <li class="flex items-start gap-2 text-sm text-ink-soft">
+                  <Icon name="leaf" size={18} class="mt-0.5 shrink-0 text-leaf-500" />
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="reveal mt-12 rounded-2xl border border-leaf-100 bg-white/70 p-8 text-center">
+      <h2 class="font-serif text-2xl text-leaf-900">Not sure which is right for you?</h2>
+      <p class="prose-soft mx-auto mt-3 max-w-xl">
+        That is completely okay. Reach out and we can find the right starting point
+        together.
+      </p>
+      <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href={LINKS.bookingUrl} class="btn-primary">Book a Session</a>
+        <a href={`mailto:${SITE.email}`} class="btn-secondary">Email Malavika</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

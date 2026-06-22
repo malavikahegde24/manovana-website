@@ -1,0 +1,94 @@
+---
+import { SITE, SOCIAL, NAV, LINKS } from '../../data/site';
+import Icon from './Icon.astro';
+const year = new Date().getFullYear();
+---
+
+<footer class="relative z-10 mt-24 border-t border-leaf-100 bg-leaf-900 text-cream/90">
+  <div class="container-content grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-4">
+    <div class="lg:col-span-2">
+      <div class="flex items-center gap-3">
+        <img
+          src="/images/manovana-logo.png"
+          alt="Manovana logo"
+          width="48"
+          height="48"
+          class="h-12 w-12 rounded-full bg-white/90 object-contain p-1"
+          loading="lazy"
+        />
+        <span class="font-serif text-2xl font-semibold text-white">Manovana</span>
+      </div>
+      <p class="mt-4 max-w-md text-sm leading-relaxed text-cream/75">
+        {SITE.tagline}
+      </p>
+      <p class="mt-4 text-sm text-cream/60">
+        Mind coaching with {SITE.coach} · 1-to-1 sessions in {SITE.languages.join(' & ')}
+      </p>
+    </div>
+
+    <div>
+      <h2 class="font-serif text-lg text-white">Explore</h2>
+      <ul class="mt-4 space-y-2.5 text-sm">
+        {
+          NAV.map((item) => (
+            <li>
+              <a class="text-cream/75 transition-colors hover:text-white" href={item.href}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="font-serif text-lg text-white">Connect</h2>
+      <ul class="mt-4 space-y-3 text-sm">
+        <li>
+          <a
+            class="group flex items-center gap-3 text-cream/75 transition-colors hover:text-white"
+            href={`mailto:${SITE.email}`}
+          >
+            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/10 text-cream transition-colors group-hover:bg-white/20">
+              <Icon name="mail" size={16} />
+            </span>
+            {SITE.email}
+          </a>
+        </li>
+        <li>
+          <a
+            class="group flex items-center gap-3 text-cream/75 transition-colors hover:text-white"
+            href={SOCIAL.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/10 text-cream transition-colors group-hover:bg-white/20">
+              <Icon name="instagram" size={16} />
+            </span>
+            Instagram {SOCIAL.instagramHandle}
+          </a>
+        </li>
+        <li>
+          <a
+            class="group flex items-center gap-3 text-cream/75 transition-colors hover:text-white"
+            href={LINKS.contact}
+          >
+            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/10 text-cream transition-colors group-hover:bg-white/20">
+              <Icon name="calendar" size={16} />
+            </span>
+            Book a session
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div
+      class="container-content flex flex-col items-center justify-between gap-2 py-6 text-xs text-cream/55 sm:flex-row"
+    >
+      <p>© {year} {SITE.name}. All rights reserved.</p>
+      <p>Heal · Grow · Bloom your Mind Garden</p>
+    </div>
+  </div>
+</footer>

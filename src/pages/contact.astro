@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/sections/PageHeader.astro';
+import Icon from '../components/ui/Icon.astro';
+import { SITE, SOCIAL, LINKS } from '../data/site';
+import { breadcrumbJsonLd } from '../lib/seo';
+---
+
+<BaseLayout
+  title="Contact & Book a Session | Manovana"
+  description="Reach out to Mind Coach Malavika Hegde. Send a message to ask a question or book a 1-to-1 session (in Kannada & English), group program or corporate workshop."
+  path="/contact"
+  jsonLd={[
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Contact', path: '/contact' },
+    ]),
+  ]}
+>
+  <PageHeader
+    eyebrow="Let's Connect"
+    title="Take the first gentle step"
+    subtitle="Have a question, or ready to begin? Send a message and Malavika will personally get back to you."
+    crumbs={[
+      { name: 'Home', href: '/' },
+      { name: 'Contact', href: '/contact' },
+    ]}
+  />
+
+  <section class="container-content py-10">
+    <div class="grid gap-10 lg:grid-cols-5">
+      <!-- Contact form (Netlify Forms) -->
+      <div class="lg:col-span-3">
+        <form
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          action="/contact/success"
+          class="reveal card space-y-5"
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <p class="hidden">
+            <label>
+              Don't fill this out if you're human: <input name="bot-field" />
+            </label>
+          </p>
+
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label for="name" class="mb-1.5 block text-sm font-medium text-leaf-900"
+                >Your name</label
+              >
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                autocomplete="name"
+                class="w-full rounded-xl border border-leaf-100 bg-white px-4 py-3 text-ink outline-none focus:border-leaf-500"
+              />
+            </div>
+            <div>
+              <label for="email" class="mb-1.5 block text-sm font-medium text-leaf-900"
+                >Email</label
+              >
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                autocomplete="email"
+                class="w-full rounded-xl border border-leaf-100 bg-white px-4 py-3 text-ink outline-none focus:border-leaf-500"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="interest" class="mb-1.5 block text-sm font-medium text-leaf-900"
+              >I'm interested in</label
+            >
+            <select
+              id="interest"
+              name="interest"
+              class="w-full rounded-xl border border-leaf-100 bg-white px-4 py-3 text-ink outline-none focus:border-leaf-500"
+            >
+              <option>1-to-1 Coaching</option>
+              <option>Group Program / Workshop</option>
+              <option>Corporate Program</option>
+              <option>Just a question</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="message" class="mb-1.5 block text-sm font-medium text-leaf-900"
+              >Your message</label
+            >
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              required
+              class="w-full rounded-xl border border-leaf-100 bg-white px-4 py-3 text-ink outline-none focus:border-leaf-500"
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary w-full sm:w-auto">Send Message</button>
+          <p class="text-xs text-ink-muted">
+            Your message goes straight to Malavika. Your details are kept private and never
+            shared.
+          </p>
+        </form>
+      </div>
+
+      <!-- Contact details + booking -->
+      <aside class="lg:col-span-2">
+        <div id="book" class="reveal card scroll-mt-28">
+          <h2 class="font-serif text-xl text-leaf-900">Book a session</h2>
+          <p class="mt-2 text-sm text-ink-soft">
+            Online booking is being set up. In the meantime, send a message or email
+            Malavika directly and she'll arrange a time that suits you.
+          </p>
+          <!-- TODO(asset): replace with the Cal.com booking embed/link when provided. -->
+          <a href={`mailto:${SITE.email}`} class="btn-primary mt-5 w-full">Email to Book</a>
+        </div>
+
+        <div class="reveal card mt-6">
+          <h2 class="font-serif text-xl text-leaf-900">Reach out directly</h2>
+          <ul class="mt-4 space-y-4 text-sm">
+            <li class="flex items-center gap-3">
+              <span class="flex h-10 w-10 items-center justify-center rounded-full bg-leaf-100 text-leaf-700">
+                <Icon name="heart" size={18} />
+              </span>
+              <a href={`mailto:${SITE.email}`} class="text-ink-soft hover:text-leaf-700"
+                >{SITE.email}</a
+              >
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="flex h-10 w-10 items-center justify-center rounded-full bg-leaf-100 text-leaf-700">
+                <Icon name="sparkles" size={18} />
+              </span>
+              <a
+                href={SOCIAL.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-ink-soft hover:text-leaf-700"
+                >Instagram {SOCIAL.instagramHandle}</a
+              >
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="flex h-10 w-10 items-center justify-center rounded-full bg-leaf-100 text-leaf-700">
+                <Icon name="users" size={18} />
+              </span>
+              <span class="text-ink-soft">1-to-1 sessions in {SITE.languages.join(' & ')}</span>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
