@@ -1,0 +1,371 @@
+---
+import QRCode from 'qrcode';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/ui/Ornament.astro';
+import { WHATSAPP, OFFERS } from '../data/site';
+import { breadcrumbJsonLd } from '../lib/seo';
+
+const questions = [
+  'I overthink frequently',
+  'I replay past conversations',
+  'I am scared of future uncertainties',
+  'I feel mentally exhausted',
+  'I feel empty and lost at times',
+];
+
+// UPI deep link + a self-generated QR (works on desktop by scanning, mobile by tapping).
+const upiUri =
+  `upi://pay?pa=${OFFERS.upiId}` +
+  `&pn=${encodeURIComponent(OFFERS.payeeName)}` +
+  `&am=${OFFERS.masterclassAmount}&cu=INR` +
+  `&tn=${encodeURIComponent('Detox Your Mind Masterclass')}`;
+const upiQr = await QRCode.toDataURL(upiUri, {
+  width: 320,
+  margin: 1,
+  color: { dark: '#22382c', light: '#ffffff' },
+});
+---
+
+<BaseLayout
+  title="Free Mind Detox Scorecard — Discover Your Mental Clutter Score | Manovana"
+  description="Take Malavika Hegde's free 2-minute Mind Detox Scorecard. Rate 5 simple statements to discover your mental clutter score — and get a personalised next step toward calm."
+  path="/assessment"
+  jsonLd={[
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Mind Detox Scorecard', path: '/assessment' },
+    ]),
+  ]}
+>
+  <!-- ============ INTRO ============ -->
+  <header class="container-content pb-4 pt-32 text-center sm:pt-36">
+    <Ornament class="mx-auto mb-5 h-11 w-11" />
+    <span class="eyebrow justify-center">free · takes 2 minutes</span>
+    <h1 class="mx-auto max-w-2xl font-serif text-4xl leading-tight text-leaf-900 sm:text-5xl">
+      What is your Mind Detox Score?
+    </h1>
+    <p class="prose-soft mx-auto mt-4 max-w-xl">
+      Your mind, like a garden, can quietly gather clutter. Rate each statement honestly to
+      see where you stand today — and receive a gentle, personalised next step.
+    </p>
+    <p class="mx-auto mt-5 inline-flex items-center gap-2 rounded-full bg-leaf-100/70 px-4 py-1.5 text-sm font-medium text-leaf-700">
+      Rate 1 to 5 &nbsp;·&nbsp; 1 = Never &nbsp;·&nbsp; 5 = Always
+    </p>
+  </header>
+
+  <!-- ============ SCORECARD ============ -->
+  <section class="container-content pb-20">
+    <div class="mx-auto max-w-2xl">
+      <!-- progress -->
+      <div id="progress-wrap" class="reveal sticky top-3 z-10 mb-6" aria-hidden="true">
+        <div class="flex items-center gap-3 rounded-full border border-leaf-100 bg-white/80 px-4 py-2 shadow-sm backdrop-blur">
+          <div class="h-2 flex-1 overflow-hidden rounded-full bg-leaf-100">
+            <div id="progress-bar" class="h-full w-0 rounded-full bg-gradient-to-r from-leaf-300 to-leaf-500 transition-[width] duration-500"></div>
+          </div>
+          <span id="progress-text" class="whitespace-nowrap text-xs font-semibold text-leaf-700">0 / 5</span>
+        </div>
+      </div>
+
+      <form
+        id="scorecard-form"
+        name="assessment"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        action="/thank-you"
+        class="space-y-5"
+      >
+        <input type="hidden" name="form-name" value="assessment" />
+        <p class="hidden">
+          <label>Leave blank if human: <input name="bot-field" /></label>
+        </p>
+        <input type="hidden" name="score" value="" />
+        <input type="hidden" name="level" value="" />
+
+        {
+          questions.map((q, i) => (
+            <div class="reveal card" data-question>
+              <p class="flex items-baseline gap-3 font-serif text-lg text-leaf-900 sm:text-xl">
+                <span class="font-semibold text-leaf-300">{String(i + 1).padStart(2, '0')}</span>
+                <span>{q}</span>
+              </p>
+              <div class="mt-5 inline-block">
+                <div class="flex items-center gap-3 sm:gap-4" role="radiogroup" aria-label={q} data-stars>
+                  {[1, 2, 3, 4, 5].map((n) => (
+                    <label class="star" data-value={n} title={`${n}`}>
+                      <input class="sr-only" type="radio" name={`q${i + 1}`} value={n} required />
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 18.9 6.1 21.5l1.2-6.5L2.5 9.4l6.6-.9z" />
+                      </svg>
+                      <span class="sr-only">{n} out of 5</span>
+                    </label>
+                  ))}
+                </div>
+                <div class="mt-2 flex justify-between px-1 text-xs text-ink-muted">
+                  <span>Never</span>
+                  <span>Always</span>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+
+        <!-- lead capture -->
+        <div class="reveal card">
+          <h2 class="font-serif text-xl text-leaf-900">Where should we send your result?</h2>
+          <p class="mt-1.5 text-sm text-ink-soft">
+            Your score and a personalised next step are ready. Add your details and Malavika
+            will keep your journey gently supported.
+          </p>
+          <div class="mt-5 grid gap-4 sm:grid-cols-2">
+            <div class="sm:col-span-2">
+              <label for="ac-name" class="mb-1.5 block text-sm font-medium text-leaf-900">Your name</label>
+              <input id="ac-name" name="name" type="text" required autocomplete="name"
+                class="w-full rounded-xl border border-leaf-100 bg-white px-4 py-3 text-ink outline-none focus:border-leaf-500" />
+            </div>
+            <div>
+              <label for="ac-email" class="mb-1.5 block text-sm font-medium text-leaf-900">Email</label>
+              <input id="ac-email" name="email" type="email" required autocomplete="email"
+                class="w-full rounded-xl border border-leaf-100 bg-white px-4 py-3 text-ink outline-none focus:border-leaf-500" />
+            </div>
+            <div>
+              <label for="ac-phone" class="mb-1.5 block text-sm font-medium text-leaf-900">WhatsApp number</label>
+              <input id="ac-phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel"
+                class="w-full rounded-xl border border-leaf-100 bg-white px-4 py-3 text-ink outline-none focus:border-leaf-500" />
+            </div>
+          </div>
+          <label class="mt-5 flex cursor-pointer items-start gap-3 text-sm text-ink-soft">
+            <input type="checkbox" name="consent" required value="yes"
+              class="mt-0.5 h-4 w-4 shrink-0 rounded border-leaf-200 text-leaf-700 focus:ring-leaf-500" />
+            <span>
+              I agree to be contacted by Malavika / Manovana about my results and relevant
+              offerings. My details are kept private and never shared.
+            </span>
+          </label>
+          <button type="submit" id="reveal-btn" class="btn-primary mt-6 w-full sm:w-auto">
+            Reveal my Mind Detox Score
+          </button>
+          <p class="mt-3 text-xs text-ink-muted">
+            Private &amp; confidential. No spam — just gentle guidance. You can opt out anytime.
+          </p>
+        </div>
+      </form>
+
+      <!-- ============ RESULT (revealed after submit) ============ -->
+      <div id="result" class="scroll-mt-24" hidden>
+        <div class="reveal-now overflow-hidden rounded-[2rem] border border-leaf-100 bg-white shadow-[0_30px_80px_-40px_rgba(91,140,90,0.5)]">
+          <div class="bg-gradient-to-br from-leaf-100 via-cream to-sky-100 px-6 py-8 text-center sm:px-10">
+            <p class="text-sm font-medium uppercase tracking-wider text-leaf-700">Your Mind Detox Score</p>
+            <p class="mt-1 font-serif text-6xl font-semibold text-leaf-900">
+              <span id="score-num">0</span><span class="text-3xl text-leaf-500">/25</span>
+            </p>
+            <p id="level-label" class="mt-2 font-serif text-2xl italic text-leaf-700"></p>
+          </div>
+
+          <div class="px-6 py-8 sm:px-10">
+            <!-- LIGHT -->
+            <div data-tier="Light" hidden>
+              <p class="text-center text-3xl" aria-hidden="true">🌿</p>
+              <h2 class="mt-2 text-center font-serif text-2xl text-leaf-900">Light Mental Clutter</h2>
+              <p class="prose-soft mx-auto mt-3 max-w-md text-center">
+                Your mind is mostly balanced — but a few small shifts can create even deeper peace.
+                Here's a gentle tool to keep the calm growing.
+              </p>
+              <div class="mt-6 text-center">
+                <a href={OFFERS.mindResetTracker} target="_blank" rel="noopener noreferrer" class="btn-primary">
+                  Download your free 5-Day Mind Reset Tracker
+                </a>
+                <p class="mt-2 text-xs text-ink-muted">Yours free — a simple daily practice for a clearer mind.</p>
+              </div>
+            </div>
+
+            <!-- MODERATE -->
+            <div data-tier="Moderate" hidden>
+              <p class="text-center text-3xl" aria-hidden="true">🌱</p>
+              <h2 class="mt-2 text-center font-serif text-2xl text-leaf-900">Moderate Mental Clutter</h2>
+              <p class="prose-soft mx-auto mt-3 max-w-md text-center">
+                You're carrying mental stress and overthinking that's asking for attention.
+                The <strong>Detox Your Mind Masterclass</strong> gives you the tools to clear it.
+              </p>
+              <div class="mx-auto mt-6 max-w-sm rounded-2xl border border-leaf-100 bg-leaf-50/60 p-6 text-center">
+                <p class="font-serif text-lg text-leaf-900">Detox Your Mind Masterclass</p>
+                <p class="mt-1 font-serif text-3xl font-semibold text-leaf-700">{OFFERS.masterclassPrice}</p>
+                <a href={upiUri} class="btn-primary mt-4 w-full">Pay {OFFERS.masterclassPrice} via UPI</a>
+                <p class="mt-4 text-xs text-ink-muted">On a computer? Scan to pay from any UPI app:</p>
+                <img src={upiQr} alt="UPI QR code to pay for the Detox Your Mind Masterclass"
+                  width="160" height="160" class="mx-auto mt-3 h-40 w-40 rounded-xl border border-leaf-100 bg-white p-2" loading="lazy" />
+                <p class="mt-3 text-xs text-ink-muted">
+                  UPI ID: <button type="button" data-copy-upi class="font-semibold text-leaf-700 underline">{OFFERS.upiId}</button>
+                </p>
+                <a id="wa-moderate" href={WHATSAPP.link} target="_blank" rel="noopener noreferrer"
+                  class="mt-4 inline-block text-sm font-semibold text-leaf-700 hover:text-leaf-900">
+                  Or register on WhatsApp →
+                </a>
+              </div>
+            </div>
+
+            <!-- HIGH -->
+            <div data-tier="High" hidden>
+              <p class="text-center text-3xl" aria-hidden="true">🔥</p>
+              <h2 class="mt-2 text-center font-serif text-2xl text-leaf-900">High Mental Toxicity</h2>
+              <p class="prose-soft mx-auto mt-3 max-w-md text-center">
+                Your mind is overloaded and asking for support — and you don't have to carry it alone.
+                Let's talk, gently and without pressure.
+              </p>
+              <div class="mt-6 text-center">
+                <a id="wa-high" href={WHATSAPP.link} target="_blank" rel="noopener noreferrer" class="btn-primary">
+                  Book your free 20-min Clarity Call
+                </a>
+                <p class="mt-2 text-xs text-ink-muted">A calm, confidential conversation with Malavika.</p>
+              </div>
+            </div>
+
+            <p class="mt-8 border-t border-leaf-100 pt-5 text-center text-sm text-ink-muted">
+              This scorecard is a gentle self-reflection, not a medical diagnosis.
+              <a href="/contact" class="text-leaf-700 underline">Reach out anytime</a> — Malavika is here.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .star {
+    cursor: pointer;
+    display: inline-flex;
+    padding: 2px;
+    border-radius: 8px;
+    transition: transform 0.15s ease;
+  }
+  .star svg {
+    width: 2.4rem;
+    height: 2.4rem;
+    fill: transparent;
+    stroke: #cdbfae; /* warm neutral (empty) */
+    stroke-width: 1.4;
+    stroke-linejoin: round;
+    transition: fill 0.15s ease, stroke 0.15s ease, transform 0.15s ease;
+  }
+  @media (min-width: 640px) {
+    .star svg { width: 2.8rem; height: 2.8rem; }
+  }
+  .star:hover { transform: translateY(-2px); }
+  .star.is-on svg {
+    fill: #f4b740; /* warm gold */
+    stroke: #e0a020;
+  }
+  /* keyboard focus ring on the whole star */
+  .star:focus-within {
+    outline: 2px solid #5b8c5a;
+    outline-offset: 2px;
+  }
+  .reveal-now { animation: pop 0.6s var(--ease-out, ease) both; }
+  @keyframes pop {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .star, .star svg, .reveal-now { transition: none; animation: none; }
+  }
+</style>
+
+<script>
+  const form = document.getElementById('scorecard-form') as HTMLFormElement | null;
+  if (form) {
+    const groups = Array.from(form.querySelectorAll<HTMLElement>('[data-stars]'));
+    const bar = document.getElementById('progress-bar');
+    const text = document.getElementById('progress-text');
+    const answered = new Set<HTMLElement>();
+
+    const paint = (group: HTMLElement, value: number) => {
+      group.querySelectorAll<HTMLElement>('.star').forEach((star) => {
+        star.classList.toggle('is-on', Number(star.dataset.value) <= value);
+      });
+    };
+
+    groups.forEach((group) => {
+      group.addEventListener('change', (e) => {
+        const target = e.target as HTMLInputElement;
+        if (target?.name?.startsWith('q')) {
+          paint(group, Number(target.value));
+          answered.add(group);
+          const pct = (answered.size / groups.length) * 100;
+          if (bar) bar.style.width = pct + '%';
+          if (text) text.textContent = `${answered.size} / ${groups.length}`;
+        }
+      });
+    });
+
+    const scoreNum = document.getElementById('score-num');
+    const levelLabel = document.getElementById('level-label');
+    const result = document.getElementById('result');
+
+    const levelFor = (score: number) =>
+      score >= 18 ? 'High' : score >= 9 ? 'Moderate' : 'Light';
+    const levelName: Record<string, string> = {
+      Light: 'Light Mental Clutter',
+      Moderate: 'Moderate Mental Clutter',
+      High: 'High Mental Toxicity',
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+
+      const data = new FormData(form);
+      let score = 0;
+      for (let i = 1; i <= groups.length; i++) score += Number(data.get('q' + i) || 0);
+      const level = levelFor(score);
+
+      (form.querySelector('[name=score]') as HTMLInputElement).value = String(score);
+      (form.querySelector('[name=level]') as HTMLInputElement).value = level;
+
+      // best-effort lead capture via Netlify Forms (no-op in local preview)
+      try {
+        await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(new FormData(form) as any).toString(),
+        });
+      } catch (_) {
+        /* offline / local — still show the result */
+      }
+
+      // pre-fill WhatsApp messages with the score
+      const wa = 'https://wa.me/919448455887?text=';
+      const waHigh = document.getElementById('wa-high') as HTMLAnchorElement | null;
+      const waMod = document.getElementById('wa-moderate') as HTMLAnchorElement | null;
+      if (waHigh) waHigh.href = wa + encodeURIComponent(
+        `Hi Malavika, I took the Mind Detox Scorecard and scored ${score}/25 (High). I'd like to book my free 20-min clarity call.`);
+      if (waMod) waMod.href = wa + encodeURIComponent(
+        `Hi Malavika, I took the Mind Detox Scorecard and scored ${score}/25 (Moderate). I'd like to register for the Detox Your Mind Masterclass.`);
+
+      if (scoreNum) scoreNum.textContent = String(score);
+      if (levelLabel) levelLabel.textContent = levelName[level];
+      result?.querySelectorAll<HTMLElement>('[data-tier]').forEach((el) => {
+        el.hidden = el.dataset.tier !== level;
+      });
+
+      form.hidden = true;
+      document.getElementById('progress-wrap')?.setAttribute('hidden', '');
+      if (result) result.hidden = false;
+      result?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    // tap-to-copy the UPI ID
+    const copyBtn = document.querySelector<HTMLButtonElement>('[data-copy-upi]');
+    copyBtn?.addEventListener('click', async () => {
+      const id = copyBtn.textContent?.trim() || '';
+      try {
+        await navigator.clipboard.writeText(id);
+        const original = copyBtn.textContent;
+        copyBtn.textContent = 'Copied ✓';
+        window.setTimeout(() => { copyBtn.textContent = original; }, 1600);
+      } catch (_) {
+        /* clipboard unavailable — the id is still visible to copy manually */
+      }
+    });
+  }
+</script>

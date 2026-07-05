@@ -118,17 +118,9 @@
   /* Backgrounds */
   .bg-meadow {
     background:
-      radial-gradient(40% 34% at 14% 22%, rgba(233, 182, 192, 0.22), transparent 70%),
-      radial-gradient(52% 44% at 74% 18%, rgba(127, 192, 238, 0.34), transparent 70%),
-      radial-gradient(46% 46% at 82% 56%, rgba(243, 217, 160, 0.34), transparent 70%),
-      radial-gradient(52% 56% at 58% 82%, rgba(120, 168, 96, 0.26), transparent 74%),
-      linear-gradient(
-        180deg,
-        #dcecf6 0%,
-        #ecf4f3 32%,
-        #f4f7ec 64%,
-        #eef3e2 100%
-      );
+      radial-gradient(58% 48% at 80% 8%, rgba(157, 181, 147, 0.20), transparent 70%),
+      radial-gradient(50% 50% at 12% 90%, rgba(201, 188, 166, 0.22), transparent 72%),
+      linear-gradient(180deg, #f8f5ee 0%, #f2f0e6 42%, #edf1e8 100%);
   }
   .mesh-blob {
     @apply pointer-events-none absolute rounded-full blur-[80px];
@@ -136,10 +128,10 @@
   }
 
   .card {
-    @apply relative overflow-hidden rounded-[1.9rem] border border-leaf-100 bg-white/70 p-8 shadow-[0_16px_46px_-22px_rgba(91,140,90,0.34)] transition-all duration-500;
+    @apply relative overflow-hidden rounded-2xl border border-leaf-100 bg-stone-50/85 p-7 shadow-[0_14px_40px_-24px_rgba(36,48,42,0.32)] transition-all duration-500;
   }
   .card:hover {
-    @apply -translate-y-1 border-leaf-200 shadow-[0_26px_60px_-24px_rgba(91,140,90,0.44)];
+    @apply -translate-y-1 border-stone-200 shadow-[0_22px_52px_-26px_rgba(36,48,42,0.42)];
   }
 
   .glass {
@@ -220,29 +212,9 @@
     @apply h-px w-full bg-gradient-to-r from-transparent via-leaf-200 to-transparent;
   }
 
-  /* Playful technique "petals" — soft tinted chips, gently rotated */
-  .petal-chip {
-    @apply inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-serif text-lg italic text-leaf-900 transition-all duration-300;
-    transform: rotate(var(--rot, 0deg));
-    box-shadow: 0 8px 20px -12px rgba(91, 140, 90, 0.45);
-  }
-  .petal-chip:hover {
-    transform: rotate(0deg) translateY(-4px) scale(1.05);
-    box-shadow: 0 16px 30px -14px rgba(91, 140, 90, 0.55);
-  }
-
   /* Garden arch / doorway panel for services */
   .arch {
     border-radius: 999px 999px 2rem 2rem;
-  }
-
-  /* Hand-written "petal notes" for testimonials — gently rotated */
-  .note {
-    transform: rotate(var(--rot, 0deg));
-    transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out);
-  }
-  .note:hover {
-    transform: rotate(0deg) translateY(-4px);
   }
 
   /* Soft vine that threads the "garden path" of concerns */

@@ -50,31 +50,34 @@ const isActive = (href: string) =>
     </ul>
 
     <div class="hidden shrink-0 lg:block">
-      <a href={LINKS.bookingUrl} class="btn-primary whitespace-nowrap px-6 py-2.5 text-sm" data-magnetic>Book a Session</a>
+      <a href={LINKS.bookingUrl} class="btn-primary whitespace-nowrap px-6 py-2.5 text-sm" data-magnetic>Schedule</a>
     </div>
 
     <button
       type="button"
-      class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-leaf-200/60 bg-white/70 text-leaf-700 lg:hidden"
+      class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-leaf-700 text-white shadow-[0_8px_22px_-6px_rgba(34,56,44,0.55)] transition-colors hover:bg-leaf-900 lg:hidden"
       aria-label="Open menu"
       aria-expanded="false"
       aria-controls="mobile-drawer"
       data-menu-toggle
     >
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" aria-hidden="true">
         <line x1="3" y1="6" x2="21" y2="6"></line>
         <line x1="3" y1="12" x2="21" y2="12"></line>
         <line x1="3" y1="18" x2="21" y2="18"></line>
       </svg>
     </button>
   </nav>
+</header>
 
-  <!-- Mobile drawer -->
-  <div
-    id="mobile-drawer"
-    class="invisible fixed inset-0 z-50 opacity-0 transition-opacity duration-300 lg:hidden"
-    data-drawer
-  >
+<!-- Mobile drawer — kept OUTSIDE <header> because the header gains a
+     backdrop-filter on scroll, which would otherwise trap this fixed overlay
+     inside the header's box. -->
+<div
+  id="mobile-drawer"
+  class="invisible fixed inset-0 z-50 opacity-0 transition-opacity duration-300 lg:hidden"
+  data-drawer
+>
     <div class="absolute inset-0 bg-leaf-900/40 backdrop-blur-sm" data-drawer-overlay></div>
     <div
       class="absolute right-0 top-0 flex h-full w-[82%] max-w-sm translate-x-full flex-col gap-2 bg-cream p-6 shadow-xl transition-transform duration-300"
@@ -105,10 +108,9 @@ const isActive = (href: string) =>
           </a>
         ))
       }
-      <a href={LINKS.bookingUrl} class="btn-primary mt-4">Book a Session</a>
+      <a href={LINKS.bookingUrl} class="btn-primary mt-4">Schedule a Consultation</a>
     </div>
   </div>
-</header>
 
 <script>
   const header = document.querySelector('[data-nav]');

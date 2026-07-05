@@ -33,9 +33,41 @@ export const SOCIAL = {
  * TODO(asset): replace `registrationUrl` with the Google Form link (Phase 2).
  */
 export const LINKS = {
-  bookingUrl: '/contact#book', // placeholder until Cal link is provided
+  bookingUrl: '/schedule', // dedicated scheduling route (Cal.com embed)
   registrationUrl: '/contact', // masterclass registration deferred to Phase 2
   contact: '/contact',
+  assessment: '/assessment', // free Mind Detox Scorecard
+} as const;
+
+/**
+ * WhatsApp contact for clarity calls & masterclass registration.
+ * `link` opens a chat; append `?text=` (URL-encoded) for a pre-filled message.
+ */
+export const WHATSAPP = {
+  number: '919448455887',
+  display: '+91 94484 55887',
+  link: 'https://wa.me/919448455887',
+} as const;
+
+/**
+ * Free / paid offerings surfaced by the Mind Detox Scorecard results.
+ * The masterclass UPI QR is generated at build time from these values.
+ */
+export const OFFERS = {
+  mindResetTracker: 'https://canva.link/6rmnj7f02umc94g',
+  masterclassAmount: 299,
+  masterclassPrice: '₹299',
+  upiId: 'malavikahegde24@okhdfcbank',
+  payeeName: 'Malavika Hegde',
+} as const;
+
+/**
+ * Cal.com scheduling.
+ * TODO(asset): set `calLink` to Malavika's real Cal.com link, e.g.
+ * "malavikahegde/consultation". While empty, /schedule shows an email fallback.
+ */
+export const SCHEDULING = {
+  calLink: '',
 } as const;
 
 export const NAV = [

@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/sections/PageHeader.astro';
+import Icon from '../components/ui/Icon.astro';
+import { SITE, SOCIAL, SCHEDULING } from '../data/site';
+import { breadcrumbJsonLd } from '../lib/seo';
+
+const calLink = SCHEDULING.calLink;
+---
+
+<BaseLayout
+  title="Schedule a Consultation | Manovana"
+  description="Book a consultation with Mind Coach Malavika Hegde. Choose a time that suits you and take the first step toward clarity, calm and lasting inner peace."
+  path="/schedule"
+  jsonLd={[
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Schedule', path: '/schedule' },
+    ]),
+  ]}
+>
+  <PageHeader
+    eyebrow="Begin"
+    title="Schedule a consultation"
+    subtitle="Choose a time that works for you. The first conversation is gentle, unhurried, and entirely about you — share as much or as little as feels right."
+    crumbs={[
+      { name: 'Home', href: '/' },
+      { name: 'Schedule', href: '/schedule' },
+    ]}
+  />
+
+  <section class="container-content pb-20">
+    {
+      calLink ? (
+        <div
+          class="reveal overflow-hidden rounded-2xl border border-leaf-100 bg-white shadow-[0_18px_50px_-28px_rgba(36,48,42,0.4)]"
+        >
+          <div id="cal-inline" style="width:100%;height:720px;overflow:auto"></div>
+        </div>
+      ) : (
+        <div class="reveal mx-auto max-w-xl rounded-2xl border border-leaf-100 bg-stone-50/85 p-10 text-center shadow-[0_18px_50px_-28px_rgba(36,48,42,0.4)]">
+          <span class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-leaf-100 text-leaf-700">
+            <Icon name="calendar" size={26} />
+          </span>
+          <h2 class="mt-5 font-serif text-2xl text-leaf-900">Online booking is being set up</h2>
+          <p class="prose-soft mx-auto mt-3 max-w-md">
+            In the meantime, email Malavika directly and she'll personally arrange a time
+            that suits you — usually within a day.
+          </p>
+          <div class="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a href={`mailto:${SITE.email}?subject=Consultation%20request`} class="btn-primary" data-magnetic>
+              Email to schedule
+            </a>
+            <a href="/contact" class="btn-secondary" data-magnetic>Send a message</a>
+          </div>
+          <p class="mt-5 text-sm text-ink-muted">
+            Or reach out on Instagram —
+            <a class="text-leaf-700 underline" href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer">
+              {SOCIAL.instagramHandle}
+            </a>
+          </p>
+        </div>
+      )
+    }
+  </section>
+
+  {
+    calLink && (
+      <script is:inline define:vars={{ calLink }}>
+        (function (C, A, L) {
+          let p = function (a, ar) { a.q.push(ar); };
+          let d = C.document;
+          C.Cal = C.Cal || function () {
+            let cal = C.Cal; let ar = arguments;
+            if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; }
+            if (ar[0] === L) {
+              const api = function () { p(api, arguments); };
+              const namespace = ar[1]; api.q = api.q || [];
+              typeof namespace === "string" ? (cal.ns[namespace] = api) && p(api, ar) : p(cal, ar);
+              return;
+            }
+            p(cal, ar);
+          };
+        })(window, "https://app.cal.com/embed/embed.js", "init");
+        Cal("init", { origin: "https://cal.com" });
+        Cal("inline", {
+          elementOrSelector: "#cal-inline",
+          calLink: calLink,
+          config: { theme: "light" },
+        });
+      </script>
+    )
+  }
+</BaseLayout>

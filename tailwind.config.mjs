@@ -30,7 +30,7 @@ export default {
         },
       },
       fontFamily: {
-        serif: ['"Playfair Display Variable"', 'Georgia', 'serif'],
+        serif: ['"Fraunces Variable"', 'Georgia', 'serif'],
         sans: ['"Inter Variable"', 'system-ui', 'sans-serif'],
       },
       maxWidth: {

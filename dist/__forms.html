@@ -21,12 +21,30 @@
         <option>1-to-1 Coaching</option>
       </select>
       <textarea name="message"></textarea>
+      <input type="checkbox" name="consent" />
     </form>
 
     <form name="freebie" data-netlify="true" netlify-honeypot="bot-field" hidden>
       <input type="hidden" name="form-name" value="freebie" />
       <input type="text" name="bot-field" />
       <input type="email" name="email" />
+      <input type="checkbox" name="consent" />
+    </form>
+
+    <form name="assessment" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="assessment" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input name="q1" />
+      <input name="q2" />
+      <input name="q3" />
+      <input name="q4" />
+      <input name="q5" />
+      <input name="score" />
+      <input name="level" />
+      <input type="checkbox" name="consent" />
     </form>
   </body>
 </html>

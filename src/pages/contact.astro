@@ -7,7 +7,7 @@ import { breadcrumbJsonLd } from '../lib/seo';
 ---
 
 <BaseLayout
-  title="Contact & Book a Session | Manovana"
+  title="Contact & Schedule a Consultation | Manovana"
   description="Reach out to Mind Coach Malavika Hegde. Send a message to ask a question or book a 1-to-1 session (in Kannada & English), group program or corporate workshop."
   path="/contact"
   jsonLd={[
@@ -104,6 +104,11 @@ import { breadcrumbJsonLd } from '../lib/seo';
             ></textarea>
           </div>
 
+          <label class="flex cursor-pointer items-start gap-3 text-sm text-ink-soft">
+            <input type="checkbox" name="consent" required value="yes"
+              class="mt-0.5 h-4 w-4 shrink-0 rounded border-leaf-200 text-leaf-700 focus:ring-leaf-500" />
+            <span>I agree to be contacted by Malavika / Manovana about my enquiry.</span>
+          </label>
           <button type="submit" class="btn-primary w-full sm:w-auto">Send Message</button>
           <p class="text-xs text-ink-muted">
             Your message goes straight to Malavika. Your details are kept private and never
@@ -115,13 +120,12 @@ import { breadcrumbJsonLd } from '../lib/seo';
       <!-- Contact details + booking -->
       <aside class="lg:col-span-2">
         <div id="book" class="reveal card scroll-mt-28">
-          <h2 class="font-serif text-xl text-leaf-900">Book a session</h2>
+          <h2 class="font-serif text-xl text-leaf-900">Schedule a consultation</h2>
           <p class="mt-2 text-sm text-ink-soft">
-            Online booking is being set up. In the meantime, send a message or email
-            Malavika directly and she'll arrange a time that suits you.
+            Pick a time that suits you on the scheduling page, or simply send a message and
+            Malavika will personally arrange one with you.
           </p>
-          <!-- TODO(asset): replace with the Cal.com booking embed/link when provided. -->
-          <a href={`mailto:${SITE.email}`} class="btn-primary mt-5 w-full">Email to Book</a>
+          <a href={LINKS.bookingUrl} class="btn-primary mt-5 w-full">Schedule a Consultation</a>
         </div>
 
         <div class="reveal card mt-6">

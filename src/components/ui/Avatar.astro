@@ -1,14 +1,15 @@
 ---
 /**
  * Testimonial avatar. Uses a real image when provided, otherwise a tasteful
- * initials placeholder. TODO(asset): pass `image` once client photos arrive.
+ * initials placeholder. `size` is the diameter in pixels.
  */
 interface Props {
   name: string;
   image?: string;
+  size?: number;
   class?: string;
 }
-const { name, image, class: className = '' } = Astro.props;
+const { name, image, size = 48, class: className = '' } = Astro.props;
 const initials = name
   .split(' ')
   .map((w) => w[0])
@@ -16,6 +17,8 @@ const initials = name
   .slice(0, 2)
   .join('')
   .toUpperCase();
+const dim = `width:${size}px;height:${size}px`;
+const spanStyle = `${dim};font-size:${Math.round(size * 0.34)}px`;
 ---
 
 {
@@ -23,14 +26,16 @@ const initials = name
     <img
       src={image}
       alt={`Photo of ${name}`}
-      width="48"
-      height="48"
+      width={size}
+      height={size}
       loading="lazy"
-      class={`h-12 w-12 rounded-full object-cover ${className}`}
+      style={dim}
+      class={`shrink-0 rounded-full object-cover ${className}`}
     />
   ) : (
     <span
-      class={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-leaf-300 to-sky-300 font-serif text-sm font-semibold text-leaf-900 ${className}`}
+      style={spanStyle}
+      class={`flex shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-leaf-300 to-sky-300 font-serif font-semibold leading-none text-leaf-900 ${className}`}
       aria-hidden="true"
     >
       {initials}

@@ -2,10 +2,11 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CtaBand from '../components/sections/CtaBand.astro';
+import TestimonialCard from '../components/sections/TestimonialCard.astro';
 import Icon from '../components/ui/Icon.astro';
 import Ornament from '../components/ui/Ornament.astro';
-import Avatar from '../components/ui/Avatar.astro';
 import { SITE, LINKS } from '../data/site';
+import { CERTIFICATIONS } from '../data/certifications';
 import { organizationJsonLd, personJsonLd } from '../lib/seo';
 
 const techniques = (await getCollection('techniques')).sort(
@@ -48,19 +49,6 @@ const services = [
     icon: 'target',
     n: '03',
   },
-];
-
-const mindTruths = [
-  { lead: 'Mind is everything.', tail: 'What you think, you become.' },
-  { lead: 'Mind can make you', tail: 'or break you.' },
-  { lead: 'To the mind that is still,', tail: 'the whole universe surrenders.' },
-];
-
-const trust = [
-  { icon: 'heart', title: 'Confidential & judgement-free', sub: 'A safe, private space to open up' },
-  { icon: 'users', title: '18,000+ lives touched', sub: 'Across 1-to-1 sessions & groups' },
-  { icon: 'sprout', title: '30+ years of wisdom', sub: 'From a career in IT to inner healing' },
-  { icon: 'sparkles', title: 'A gentle complement', sub: 'Works alongside professional care' },
 ];
 
 const beginSteps = [
@@ -121,7 +109,7 @@ const beginSteps = [
         </p>
 
         <div class="reveal mt-8 flex flex-wrap items-center gap-3">
-          <a href={LINKS.bookingUrl} class="btn-primary" data-magnetic>Book a Session</a>
+          <a href={LINKS.bookingUrl} class="btn-primary" data-magnetic>Schedule a Consultation</a>
           <a href="/about" class="btn-secondary" data-magnetic>Meet Malavika</a>
         </div>
 
@@ -155,7 +143,7 @@ const beginSteps = [
   </section>
 
   <!-- ============ THE MEANING — Mano + Vana (anchors 'mind' + the IT→Soul story) ============ -->
-  <section class="relative py-20 sm:py-28">
+  <section class="relative py-14 sm:py-20">
     <div class="container-wide">
       <div class="grid items-center gap-10 lg:grid-cols-[auto_1fr] lg:gap-16">
         <div class="reveal mx-auto">
@@ -176,18 +164,13 @@ const beginSteps = [
             garden. Manovana is the <span class="text-leaf-700">garden of your mind</span>:
             a place to tend what hurts, and let happiness, love and peace bloom.
           </p>
-          <p class="prose-soft reveal mt-6 max-w-xl">
-            Tended by <strong class="font-semibold text-leaf-700">Malavika Hegde</strong> —
-            who spent 30 years in IT before moving <em>from Systems to Souls, Logic to
-            Light</em> to become a Mind Coach &amp; Counsellor.
-          </p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============ MIND TRUTHS ============ -->
-  <section id="truths" class="relative scroll-mt-24 overflow-hidden py-28 sm:py-40">
+  <section id="truths" class="relative scroll-mt-24 overflow-hidden py-20 sm:py-28">
     <!-- calm wash + faint tree-in-mind watermark (no blossom) -->
     <div class="absolute inset-0 -z-10 bg-gradient-to-b from-leaf-50 via-sky-100/40 to-leaf-100/70"></div>
     <img
@@ -201,27 +184,17 @@ const beginSteps = [
 
     <div class="container-content text-center">
       <Ornament class="mx-auto mb-6 h-11 w-11" />
-      <p class="reveal font-serif text-xl italic text-leaf-500">a gentle truth to begin</p>
-      <div class="mx-auto mt-10 max-w-3xl space-y-12">
-        {
-          mindTruths.map((m, i) => (
-            <div class="reveal">
-              <p class="font-serif text-[1.7rem] font-normal italic leading-snug text-ink sm:text-[2.4rem]">
-                {m.lead}{' '}
-                <span class="text-leaf-700 not-italic">{m.tail}</span>
-              </p>
-              {i < mindTruths.length - 1 && (
-                <div class="mx-auto mt-12 text-leaf-300" aria-hidden="true">✿</div>
-              )}
-            </div>
-          ))
-        }
-      </div>
+      <blockquote class="reveal mx-auto mt-8 max-w-3xl font-serif text-[1.9rem] italic leading-[1.32] text-ink sm:text-[2.7rem]">
+        “Your Mind is a Garden,<br />
+        your Thoughts are the Seeds.<br />
+        <span class="text-leaf-700 not-italic">You can grow Flowers,</span><br />
+        or weeds…”
+      </blockquote>
     </div>
   </section>
 
   <!-- ============ ABOUT ============ -->
-  <section class="relative py-20 sm:py-28">
+  <section class="relative py-14 sm:py-20">
     <div class="container-wide">
       <div class="grid items-center gap-14 lg:grid-cols-[0.9fr_1.1fr]">
         <!-- portrait -->
@@ -259,8 +232,42 @@ const beginSteps = [
     </div>
   </section>
 
+  <!-- ============ CREDENTIALS BADGES ============ -->
+  <section class="relative py-12 sm:py-16">
+    <div class="container-wide">
+      <div class="reveal relative overflow-hidden rounded-[2.2rem] border border-leaf-100 bg-white/70 px-6 py-10 shadow-[0_22px_60px_-34px_rgba(91,140,90,0.4)] sm:px-10">
+        <div class="mx-auto max-w-2xl text-center">
+          <span class="eyebrow justify-center">certified &amp; accredited</span>
+          <h2 class="font-serif text-2xl text-leaf-900 sm:text-3xl">
+            Trained across {CERTIFICATIONS.length} professional certifications
+          </h2>
+          <p class="prose-soft mt-3">
+            In coaching, counselling and holistic healing — so you're always in
+            experienced, qualified hands.
+          </p>
+        </div>
+        <ul class="mt-8 flex flex-wrap justify-center gap-2.5">
+          {
+            CERTIFICATIONS.map((c) => (
+              <li class="inline-flex items-center gap-2 rounded-full border border-leaf-100 bg-leaf-50/70 px-4 py-2 text-sm font-medium text-leaf-900">
+                <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 text-leaf-500" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" />
+                  <path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5" />
+                </svg>
+                {c.short}
+              </li>
+            ))
+          }
+        </ul>
+        <div class="mt-8 text-center">
+          <a href="/about#certifications" class="btn-secondary" data-magnetic>See the certificates</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ WHO IS THIS FOR ============ -->
-  <section class="relative py-20 sm:py-28">
+  <section class="relative py-14 sm:py-20">
     <div class="container-wide">
       <div class="grid gap-12 lg:grid-cols-2">
         <div>
@@ -289,32 +296,8 @@ const beginSteps = [
     </div>
   </section>
 
-  <!-- ============ TRUST / REASSURANCE ============ -->
-  <section class="relative py-10 sm:py-14">
-    <div class="container-wide">
-      <div class="reveal rounded-[2.2rem] border border-leaf-100 bg-white/65 px-6 py-9 shadow-[0_18px_50px_-28px_rgba(91,140,90,0.35)] sm:px-10">
-        <p class="text-center font-serif text-xl italic text-leaf-700 sm:text-2xl">
-          You are in safe, experienced, and gentle hands.
-        </p>
-        <div class="mt-8 grid gap-x-8 gap-y-8 text-center sm:grid-cols-2 lg:grid-cols-4">
-          {
-            trust.map((t) => (
-              <div class="reveal flex flex-col items-center gap-2">
-                <span class="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-leaf-100 to-sky-100 text-leaf-700">
-                  <Icon name={t.icon} size={22} />
-                </span>
-                <span class="font-serif text-lg text-leaf-900">{t.title}</span>
-                <span class="text-xs leading-relaxed text-ink-muted">{t.sub}</span>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ WHAT I HELP WITH ============ -->
-  <section id="help-with" class="relative scroll-mt-24 py-20 sm:py-28">
+  <section id="help-with" class="relative scroll-mt-24 py-14 sm:py-20">
     <div class="container-wide">
       <div class="reveal mx-auto max-w-2xl text-center">
         <Ornament class="mx-auto mb-4 h-10 w-10" />
@@ -364,7 +347,7 @@ const beginSteps = [
   </section>
 
   <!-- ============ APPROACH (04) — a garland of techniques ============ -->
-  <section id="approach" class="relative scroll-mt-24 py-24 sm:py-32">
+  <section id="approach" class="relative scroll-mt-24 pt-14 pb-10 sm:pt-20 sm:pb-14">
     <div class="container-content text-center">
       <Ornament class="mx-auto mb-4 h-10 w-10" />
       <span class="eyebrow justify-center">my approach</span>
@@ -376,40 +359,39 @@ const beginSteps = [
         tailored gently to you.
       </p>
 
-      <!-- a playful bouquet of techniques — soft tinted petals, gently scattered -->
-      <div class="reveal mx-auto mt-12 flex max-w-3xl flex-wrap items-center justify-center gap-3">
+      <!-- the methodology as a structured system of modalities -->
+      <div class="reveal mx-auto mt-14 grid max-w-5xl gap-px overflow-hidden rounded-2xl border border-leaf-100 bg-leaf-100 text-left sm:grid-cols-2 lg:grid-cols-3">
         {
-          techniques.map((t, i) => {
-            const tints = [
-              'bg-[#f7dde6]',
-              'bg-sky-100',
-              'bg-[#eef3da]',
-              'bg-[#f7ecce]',
-              'bg-leaf-100',
-            ];
-            const rots = [-3, 2, -2, 3, -1, 2, -3, 1, -2, 3];
+          techniques.map((t) => {
+            const sub = t.data.shortTitle && t.data.shortTitle !== t.data.title ? t.data.title : null;
             return (
               <a
                 href={`/techniques/${t.id}`}
-                class={`petal-chip ${tints[i % tints.length]}`}
-                style={`--rot:${rots[i % rots.length]}deg`}
+                class="group flex items-start gap-4 bg-stone-50 p-6 transition-colors duration-300 hover:bg-white"
               >
-                <span class="text-leaf-500" aria-hidden="true">✿</span>
-                {t.data.shortTitle ?? t.data.title}
+                <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-leaf-100 bg-white text-leaf-700 transition-colors group-hover:border-leaf-300">
+                  <Icon name={t.data.icon} size={20} />
+                </span>
+                <span class="min-w-0">
+                  <span class="block font-serif text-lg leading-tight text-leaf-900 transition-colors group-hover:text-leaf-700">
+                    {t.data.shortTitle ?? t.data.title}
+                  </span>
+                  {sub && <span class="mt-0.5 block text-xs leading-snug text-ink-muted">{sub}</span>}
+                </span>
               </a>
             );
           })
         }
       </div>
 
-      <a href="/approach" class="btn-secondary reveal mt-12" data-magnetic>
+      <a href="/approach" class="btn-secondary reveal mt-10" data-magnetic>
         Explore the full approach
       </a>
     </div>
   </section>
 
   <!-- ============ SERVICES ============ -->
-  <section class="relative py-20 sm:py-28">
+  <section class="relative pt-8 pb-14 sm:pt-10 sm:pb-20">
     <div class="container-wide">
       <div class="reveal mx-auto max-w-2xl text-center">
         <Ornament class="mx-auto mb-4 h-10 w-10" />
@@ -421,9 +403,9 @@ const beginSteps = [
         {
           services.map((s, i) => {
             const tints = [
-              'from-[#f8e2ea] via-white to-leaf-50',
-              'from-sky-100 via-white to-leaf-50',
-              'from-[#f8efd6] via-white to-leaf-50',
+              'from-stone-100 via-white to-leaf-50',
+              'from-leaf-100 via-white to-stone-50',
+              'from-stone-200 via-white to-leaf-50',
             ];
             return (
               <a href="/services" class="reveal group block text-center">
@@ -449,7 +431,7 @@ const beginSteps = [
   </section>
 
   <!-- ============ TESTIMONIALS ============ -->
-  <section class="relative py-20 sm:py-28">
+  <section class="relative py-14 sm:py-20">
     <div class="container-wide">
       <div class="reveal mx-auto max-w-2xl text-center">
         <Ornament class="mx-auto mb-4 h-10 w-10" />
@@ -457,38 +439,17 @@ const beginSteps = [
         <h2 class="section-title">Real reflections from real sessions.</h2>
       </div>
 
-      <!-- gently scattered "petal notes" — like handwritten cards in a journal -->
-      <div class="reveal mx-auto mt-14 max-w-5xl gap-5 sm:columns-2 lg:columns-3">
+      <div class="reveal mx-auto mt-14 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {
-          testimonials.map((t, i) => {
-            const tints = [
-              'bg-[#f7dde6]/70',
-              'bg-sky-100/70',
-              'bg-[#f7ecce]/70',
-              'bg-leaf-100/70',
-              'bg-white/80',
-            ];
-            const rots = [-2, 1.5, -1.2, 2, -1.6, 1, -2, 1.4];
-            const big = i === 0;
-            return (
-              <figure
-                class={`note mb-5 break-inside-avoid rounded-[1.6rem] border border-white/70 p-6 shadow-[0_14px_40px_-22px_rgba(91,140,90,0.4)] ${tints[i % tints.length]} ${big ? 'sm:p-8' : ''}`}
-                style={`--rot:${rots[i % rots.length]}deg`}
-              >
-                <span class="font-serif text-4xl leading-none text-leaf-300">“</span>
-                <blockquote class={`-mt-3 font-serif italic leading-snug text-ink ${big ? 'text-2xl' : 'text-lg'}`}>
-                  {t.data.quote}
-                </blockquote>
-                <figcaption class="mt-5 flex items-center gap-3">
-                  <Avatar name={t.data.name} image={t.data.image} />
-                  <span>
-                    <span class="block text-sm font-semibold text-leaf-900">{t.data.name}</span>
-                    {t.data.context && <span class="block text-xs italic text-ink-muted">{t.data.context}</span>}
-                  </span>
-                </figcaption>
-              </figure>
-            );
-          })
+          testimonials.slice(0, 6).map((t) => (
+            <TestimonialCard
+              id={t.id}
+              name={t.data.name}
+              context={t.data.context}
+              quote={t.data.quote}
+              image={t.data.image}
+            />
+          ))
         }
       </div>
 
@@ -499,7 +460,7 @@ const beginSteps = [
   </section>
 
   <!-- ============ HOW WE BEGIN ============ -->
-  <section class="relative py-20 sm:py-28">
+  <section class="relative py-14 sm:py-20">
     <div class="container-wide">
       <div class="reveal mx-auto max-w-2xl text-center">
         <Ornament class="mx-auto mb-4 h-10 w-10" />
@@ -523,52 +484,76 @@ const beginSteps = [
     </div>
   </section>
 
-  <!-- ============ LEAD MAGNET — gentle first gift ============ -->
-  <section class="relative py-12 sm:py-16">
-    <div class="container-content">
-      <div class="reveal relative overflow-hidden rounded-[2.2rem] border border-leaf-100 bg-white/70 px-6 py-12 text-center shadow-[0_22px_60px_-32px_rgba(91,140,90,0.4)] sm:px-12">
-        <img
-          src="/images/emblem.png"
-          alt=""
-          aria-hidden="true"
-          class="pointer-events-none absolute -right-10 -top-10 w-44 opacity-[0.08]"
-          loading="lazy"
-        />
-        <div class="relative mx-auto max-w-xl">
-          <span class="eyebrow justify-center">a gift to begin</span>
-          <h2 class="font-serif text-3xl text-leaf-900 sm:text-4xl">
-            Detox Your Mind — a free guided practice
-          </h2>
-          <p class="prose-soft mt-4">
-            A short practice to quieten a racing mind and return to calm. Leave your email
-            and Malavika will send it to you.
+  <!-- ============ FREE GIFTS — two gentle ways to begin ============ -->
+  <section class="relative py-14 sm:py-20">
+    <div class="container-wide">
+      <div class="reveal mx-auto mb-10 max-w-2xl text-center">
+        <span class="eyebrow justify-center">free gifts to begin</span>
+        <h2 class="section-title">Start your healing today — on the house.</h2>
+        <p class="prose-soft mt-3">Two gentle, no-cost ways to take your first step inward.</p>
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-2">
+        <!-- Gift 1: free Mind Detox Scorecard -->
+        <a
+          href="/assessment"
+          class="reveal group relative flex flex-col overflow-hidden rounded-[2.2rem] border border-leaf-100 bg-gradient-to-br from-leaf-50 via-white to-sky-100 px-7 py-9 shadow-[0_22px_60px_-32px_rgba(91,140,90,0.4)] transition-transform duration-300 hover:-translate-y-1 sm:px-10"
+          data-magnetic
+        >
+          <span class="inline-flex w-fit items-center gap-2 rounded-full bg-leaf-700 px-3 py-1 text-xs font-semibold text-white">Free · 2 min</span>
+          <div class="mt-5 flex gap-1.5" aria-hidden="true">
+            {[0, 1, 2, 3, 4].map((n) => (
+              <svg viewBox="0 0 24 24" class={`h-7 w-7 ${n < 3 ? 'fill-[#f4b740] stroke-[#e0a020]' : 'fill-transparent stroke-leaf-300'}`} stroke-width="1.4" stroke-linejoin="round">
+                <path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 18.9 6.1 21.5l1.2-6.5L2.5 9.4l6.6-.9z" />
+              </svg>
+            ))}
+          </div>
+          <h3 class="mt-5 font-serif text-2xl text-leaf-900 sm:text-3xl">What's your Mind Detox Score?</h3>
+          <p class="prose-soft mt-3 flex-1">
+            Rate 5 simple statements and instantly discover your mental clutter score — with a
+            personalised next step toward calm.
           </p>
-          <!-- Netlify form — TODO(asset): attach the real guided-practice file/link on send -->
-          <form
-            name="freebie"
-            method="POST"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
-            action="/thank-you"
-            class="mx-auto mt-7 flex max-w-md flex-col gap-3 sm:flex-row"
-          >
-            <input type="hidden" name="form-name" value="freebie" />
-            <p class="hidden">
-              <label>Leave blank if human: <input name="bot-field" /></label>
+          <span class="btn-primary mt-7 w-fit">Take the free Scorecard →</span>
+        </a>
+
+        <!-- Gift 2: free guided practice (email capture) -->
+        <div class="reveal relative flex flex-col overflow-hidden rounded-[2.2rem] border border-leaf-100 bg-white/70 px-7 py-9 shadow-[0_22px_60px_-32px_rgba(91,140,90,0.4)] sm:px-10">
+          <img src="/images/emblem.png" alt="" aria-hidden="true" class="pointer-events-none absolute -right-8 -top-8 w-40 opacity-[0.07]" loading="lazy" />
+          <div class="relative flex flex-1 flex-col">
+            <span class="inline-flex w-fit items-center gap-2 rounded-full bg-leaf-100 px-3 py-1 text-xs font-semibold text-leaf-700">Free guided practice</span>
+            <h3 class="mt-5 font-serif text-2xl text-leaf-900 sm:text-3xl">Detox Your Mind — a guided meditation</h3>
+            <p class="prose-soft mt-3 flex-1">
+              A short practice to quieten a racing mind and return to calm. Leave your email and
+              Malavika will send it to you.
             </p>
-            <label class="sr-only" for="freebie-email">Your email</label>
-            <input
-              id="freebie-email"
-              name="email"
-              type="email"
-              required
-              autocomplete="email"
-              placeholder="you@email.com"
-              class="flex-1 rounded-full border border-leaf-100 bg-white px-5 py-3 text-ink outline-none focus:border-leaf-500"
-            />
-            <button type="submit" class="btn-primary whitespace-nowrap">Send it to me</button>
-          </form>
-          <p class="mt-3 text-xs text-ink-muted">No spam, ever. Just a gentle step inward.</p>
+            <form
+              name="freebie"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              action="/thank-you"
+              class="mt-6 flex flex-col gap-3 sm:flex-row"
+            >
+              <input type="hidden" name="form-name" value="freebie" />
+              <p class="hidden"><label>Leave blank if human: <input name="bot-field" /></label></p>
+              <label class="sr-only" for="freebie-email">Your email</label>
+              <input
+                id="freebie-email"
+                name="email"
+                type="email"
+                required
+                autocomplete="email"
+                placeholder="you@email.com"
+                class="flex-1 rounded-full border border-leaf-100 bg-white px-5 py-3 text-ink outline-none focus:border-leaf-500"
+              />
+              <button type="submit" class="btn-primary whitespace-nowrap">Send it to me</button>
+            </form>
+            <label class="mt-3 flex cursor-pointer items-start gap-2.5 text-xs text-ink-muted">
+              <input type="checkbox" name="consent" required value="yes"
+                class="mt-0.5 h-4 w-4 shrink-0 rounded border-leaf-200 text-leaf-700 focus:ring-leaf-500" />
+              <span>I agree to receive this practice and occasional gentle emails from Manovana. No spam, ever.</span>
+            </label>
+          </div>
         </div>
       </div>
     </div>

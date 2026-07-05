@@ -39,6 +39,7 @@ const testimonials = (await getCollection('testimonials')).sort(
         testimonials.map((t) => (
           <div class="reveal">
             <TestimonialCard
+              id={t.id}
               name={t.data.name}
               context={t.data.context}
               quote={t.data.quote}
@@ -48,10 +49,9 @@ const testimonials = (await getCollection('testimonials')).sort(
         ))
       }
     </div>
-    <!-- TODO(asset): add 2–3 named testimonials with client photos when provided. -->
     <p class="mt-8 text-center text-sm text-ink-muted">
-      Testimonials are shared from real sessions. Names are withheld to respect client
-      privacy.
+      Testimonials are shared from real sessions. Names are shown with each client's
+      permission; others are shared anonymously to respect privacy.
     </p>
   </section>
 

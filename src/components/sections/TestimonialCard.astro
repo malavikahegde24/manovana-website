@@ -5,8 +5,11 @@ interface Props {
   context?: string;
   quote: string;
   image?: string;
+  id?: string | number;
 }
-const { name, context, quote, image } = Astro.props;
+const { name, context, quote, image, id = name } = Astro.props;
+const isLong = quote.length > 220;
+const modalId = `testimonial-${id}`;
 ---
 
 <figure class="card flex h-full flex-col">
@@ -19,8 +22,26 @@ const { name, context, quote, image } = Astro.props;
     <path d="M9.5 6C6.5 6 4 8.5 4 11.5c0 2.6 1.9 4.5 4.3 4.5.3 0 .6 0 .9-.1-.6 1.6-2 2.8-3.7 3.3l.6 1.8c3.5-1 6-4.2 6-8.3C12 9 11 6 9.5 6Zm9 0C15.5 6 13 8.5 13 11.5c0 2.6 1.9 4.5 4.3 4.5.3 0 .6 0 .9-.1-.6 1.6-2 2.8-3.7 3.3l.6 1.8c3.5-1 6-4.2 6-8.3C21 9 20 6 18.5 6Z"
     ></path>
   </svg>
-  <blockquote class="flex-1 text-ink-soft">{quote}</blockquote>
-  <figcaption class="mt-5 flex items-center gap-3">
+  {
+    isLong ? (
+      <>
+        <blockquote class="line-clamp-4 flex-1 leading-relaxed text-ink-soft">{quote}</blockquote>
+        <button
+          type="button"
+          class="mt-2 inline-flex items-center gap-1 self-start text-sm font-semibold text-leaf-600 transition-colors hover:text-leaf-700"
+          data-testimonial-open={modalId}
+        >
+          Read more
+          <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
+      </>
+    ) : (
+      <blockquote class="flex-1 leading-relaxed text-ink-soft">{quote}</blockquote>
+    )
+  }
+  <figcaption class="mt-5 flex items-center gap-3 border-t border-leaf-100 pt-4">
     <Avatar name={name} image={image} />
     <span>
       <span class="block text-sm font-semibold text-leaf-900">{name}</span>
@@ -28,3 +49,97 @@ const { name, context, quote, image } = Astro.props;
     </span>
   </figcaption>
 </figure>
+
+{
+  isLong && (
+    <div
+      class="testimonial-modal invisible fixed inset-0 z-[60] flex items-end justify-center opacity-0 transition-opacity duration-300 sm:items-center sm:p-4"
+      data-testimonial-modal={modalId}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Testimonial from ${name}`}
+    >
+      <div class="absolute inset-0 bg-leaf-900/50 backdrop-blur-sm" data-testimonial-close />
+      <div
+        class="testimonial-panel relative flex max-h-[90dvh] w-full max-w-lg translate-y-6 flex-col overflow-hidden rounded-t-3xl bg-cream shadow-2xl transition-transform duration-300 sm:max-h-[85dvh] sm:translate-y-4 sm:rounded-3xl"
+        data-testimonial-panel
+      >
+        {/* header — identity first, stays pinned while the quote scrolls */}
+        <div class="flex items-center gap-4 border-b border-leaf-100 p-6 pr-16 sm:p-7 sm:pr-16">
+          <Avatar name={name} image={image} size={56} />
+          <span class="min-w-0">
+            <span class="block font-serif text-lg leading-tight text-leaf-900">{name}</span>
+            {context && <span class="mt-0.5 block text-sm text-ink-muted">{context}</span>}
+          </span>
+        </div>
+
+        <button
+          type="button"
+          class="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/70 text-leaf-700 shadow-sm transition-colors hover:bg-white sm:right-5 sm:top-5"
+          aria-label="Close"
+          data-testimonial-close
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+
+        {/* scrollable quote body */}
+        <div class="overflow-y-auto overscroll-contain px-6 py-6 sm:px-7 sm:py-7">
+          <svg class="mb-2 h-8 w-8 text-leaf-200" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M9.5 6C6.5 6 4 8.5 4 11.5c0 2.6 1.9 4.5 4.3 4.5.3 0 .6 0 .9-.1-.6 1.6-2 2.8-3.7 3.3l.6 1.8c3.5-1 6-4.2 6-8.3C12 9 11 6 9.5 6Zm9 0C15.5 6 13 8.5 13 11.5c0 2.6 1.9 4.5 4.3 4.5.3 0 .6 0 .9-.1-.6 1.6-2 2.8-3.7 3.3l.6 1.8c3.5-1 6-4.2 6-8.3C21 9 20 6 18.5 6Z" />
+          </svg>
+          <blockquote class="whitespace-pre-line text-[1.05rem] leading-relaxed text-ink">{quote}</blockquote>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+<script>
+  // Modals are authored inside each card, but cards live in `.reveal` wrappers
+  // that carry a transform — which would trap `position: fixed` to the card
+  // instead of the viewport. Relocate every modal to <body> so it overlays the
+  // whole screen and stacks above everything.
+  document
+    .querySelectorAll('[data-testimonial-modal]')
+    .forEach((m) => document.body.appendChild(m));
+
+  const openModal = (modal: Element) => {
+    const panel = modal.querySelector('[data-testimonial-panel]');
+    modal.classList.remove('invisible', 'opacity-0');
+    panel?.classList.remove('translate-y-6', 'sm:translate-y-4');
+    document.body.style.overflow = 'hidden';
+  };
+  const closeModal = (modal: Element) => {
+    const panel = modal.querySelector('[data-testimonial-panel]');
+    panel?.classList.add('translate-y-6', 'sm:translate-y-4');
+    modal.classList.add('opacity-0');
+    document.body.style.overflow = '';
+    window.setTimeout(() => modal.classList.add('invisible'), 300);
+  };
+
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    const opener = target.closest('[data-testimonial-open]');
+    if (opener) {
+      const modal = document.querySelector(
+        `[data-testimonial-modal="${opener.getAttribute('data-testimonial-open')}"]`,
+      );
+      if (modal) openModal(modal);
+      return;
+    }
+    if (target.closest('[data-testimonial-close]')) {
+      const modal = target.closest('[data-testimonial-modal]');
+      if (modal) closeModal(modal);
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    document
+      .querySelectorAll('[data-testimonial-modal]:not(.invisible)')
+      .forEach(closeModal);
+  });
+</script>

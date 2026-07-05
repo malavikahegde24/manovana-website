@@ -4,6 +4,7 @@ import PageHeader from '../components/sections/PageHeader.astro';
 import CtaBand from '../components/sections/CtaBand.astro';
 import Icon from '../components/ui/Icon.astro';
 import { SITE } from '../data/site';
+import { CERTIFICATIONS } from '../data/certifications';
 import { personJsonLd, breadcrumbJsonLd } from '../lib/seo';
 
 const milestones = [
@@ -118,6 +119,48 @@ const milestones = [
             <h3 class="font-serif text-lg text-leaf-900">{m.title}</h3>
             <p class="mt-2 text-sm leading-relaxed text-ink-soft">{m.text}</p>
           </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- ============ CERTIFICATIONS ============ -->
+  <section id="certifications" class="container-content scroll-mt-24 py-12">
+    <div class="mb-10 max-w-2xl">
+      <span class="eyebrow">credentials</span>
+      <h2 class="section-title">Certifications &amp; training</h2>
+      <p class="prose-soft mt-3">
+        Malavika's work is grounded in years of accredited training across coaching,
+        counselling and holistic healing. Tap any certificate to view it in full.
+      </p>
+    </div>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        CERTIFICATIONS.map((c) => (
+          <a
+            href={`/images/certificates/${c.slug}.jpg`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group reveal flex flex-col overflow-hidden rounded-2xl border border-leaf-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+          >
+            <div class="aspect-[4/3] overflow-hidden bg-leaf-50/60">
+              <img
+                src={`/images/certificates/${c.slug}.jpg`}
+                alt={`${c.title} — certificate awarded to ${SITE.coach}`}
+                width="1100"
+                height="825"
+                loading="lazy"
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+              />
+            </div>
+            <div class="flex flex-1 flex-col p-4">
+              <h3 class="font-serif text-base leading-snug text-leaf-900">{c.title}</h3>
+              <p class="mt-1 text-xs text-ink-muted">
+                {c.issuer ? `${c.issuer} · ` : ''}
+                {c.year}
+              </p>
+            </div>
+          </a>
         ))
       }
     </div>
