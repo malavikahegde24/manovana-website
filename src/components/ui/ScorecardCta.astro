@@ -1,0 +1,118 @@
+---
+/**
+ * Persistent, gentle nudge toward the free Mind Detox Scorecard.
+ * Two device-tuned treatments: a floating pill on desktop, a sticky bottom
+ * bar on mobile. Both appear after a little scroll and are dismissible
+ * (remembered in localStorage). Rendered site-wide via BaseLayout, except on
+ * the Scorecard itself and the thank-you pages.
+ */
+import { LINKS } from '../../data/site';
+---
+
+<!-- Desktop: floating pill (bottom-right) -->
+<div
+  data-scorecard-cta
+  class="pointer-events-none fixed bottom-6 right-6 z-40 hidden translate-y-8 opacity-0 transition-all duration-500 lg:block"
+>
+  <div class="relative">
+    <a
+      href={LINKS.assessment}
+      class="group flex items-center gap-3 rounded-full border border-leaf-100 bg-white/95 py-2.5 pl-3 pr-5 shadow-[0_18px_44px_-16px_rgba(36,48,42,0.55)] backdrop-blur transition-colors hover:border-leaf-200"
+    >
+      <span class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-leaf-100 to-sky-100">
+        <span class="flex items-center gap-0.5" aria-hidden="true">
+          <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 fill-[#f4b740] stroke-[#e0a020]" stroke-width="1.4" stroke-linejoin="round"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 18.9 6.1 21.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg>
+          <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 fill-[#f4b740] stroke-[#e0a020]" stroke-width="1.4" stroke-linejoin="round"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 18.9 6.1 21.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg>
+          <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 fill-[#f4b740] stroke-[#e0a020]" stroke-width="1.4" stroke-linejoin="round"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 18.9 6.1 21.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg>
+        </span>
+      </span>
+      <span class="leading-tight">
+        <span class="block text-[0.7rem] font-semibold uppercase tracking-wide text-leaf-600">Free · 2 min</span>
+        <span class="block text-sm font-semibold text-leaf-900">What's your Mind Detox Score?</span>
+      </span>
+      <span aria-hidden="true" class="ml-1 text-leaf-500 transition-transform group-hover:translate-x-0.5">→</span>
+    </a>
+    <button
+      type="button"
+      data-cta-close
+      aria-label="Dismiss"
+      class="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full border border-leaf-100 bg-white text-leaf-700 shadow-sm hover:bg-leaf-50"
+    >
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- Mobile: sticky bottom bar -->
+<div
+  data-scorecard-cta
+  class="pointer-events-none fixed inset-x-0 bottom-0 z-40 translate-y-full opacity-0 transition-all duration-500 lg:hidden"
+>
+  <div class="relative m-3 flex items-center gap-3 rounded-2xl border border-leaf-100 bg-white/95 p-2.5 pl-4 shadow-[0_-10px_34px_-14px_rgba(36,48,42,0.5)] backdrop-blur">
+    <span class="min-w-0 flex-1">
+      <span class="flex items-center gap-2">
+        <span class="flex items-center gap-0.5" aria-hidden="true">
+          <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 fill-[#f4b740] stroke-[#e0a020]" stroke-width="1.4" stroke-linejoin="round"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 18.9 6.1 21.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg>
+          <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 fill-[#f4b740] stroke-[#e0a020]" stroke-width="1.4" stroke-linejoin="round"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 18.9 6.1 21.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg>
+          <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 fill-[#f4b740] stroke-[#e0a020]" stroke-width="1.4" stroke-linejoin="round"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 18.9 6.1 21.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg>
+        </span>
+        <span class="text-[0.7rem] font-semibold uppercase tracking-wide text-leaf-600">Free · 2 min</span>
+      </span>
+      <span class="mt-0.5 block truncate text-sm font-semibold text-leaf-900">What's your Mind Detox Score?</span>
+    </span>
+    <a href={LINKS.assessment} class="btn-primary shrink-0 whitespace-nowrap px-4 py-2.5 text-sm">Take it →</a>
+    <button
+      type="button"
+      data-cta-close
+      aria-label="Dismiss"
+      class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-ink-muted hover:text-leaf-700"
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  const KEY = 'manovana:scorecard-cta-dismissed';
+  const ctas = Array.from(document.querySelectorAll<HTMLElement>('[data-scorecard-cta]'));
+
+  if (ctas.length && localStorage.getItem(KEY) !== '1') {
+    const shownCls = ['opacity-100', 'translate-y-0', 'pointer-events-auto'];
+
+    const show = () =>
+      ctas.forEach((el) => {
+        el.classList.remove('opacity-0', 'translate-y-8', 'translate-y-full', 'pointer-events-none');
+        el.classList.add(...shownCls);
+      });
+    const hide = () =>
+      ctas.forEach((el) => {
+        el.classList.remove(...shownCls);
+        el.classList.add('opacity-0', 'pointer-events-none');
+        // restore the correct off-screen transform per treatment
+        el.classList.add(el.classList.contains('lg:hidden') ? 'translate-y-full' : 'translate-y-8');
+      });
+
+    let shown = false;
+    const onScroll = () => {
+      if (!shown && window.scrollY > 460) {
+        show();
+        shown = true;
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    document.querySelectorAll('[data-cta-close]').forEach((btn) =>
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        hide();
+        localStorage.setItem(KEY, '1');
+        window.removeEventListener('scroll', onScroll);
+      }),
+    );
+  }
+</script>

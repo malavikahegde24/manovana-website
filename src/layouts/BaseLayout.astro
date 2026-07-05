@@ -5,6 +5,7 @@ import '@fontsource-variable/inter';
 import '../styles/global.css';
 import Nav from '../components/ui/Nav.astro';
 import Footer from '../components/ui/Footer.astro';
+import ScorecardCta from '../components/ui/ScorecardCta.astro';
 import { SITE } from '../data/site';
 import { formatTitle, canonical, type SeoProps } from '../lib/seo';
 
@@ -29,6 +30,13 @@ const {
 const pageTitle = formatTitle(title);
 const canonicalUrl = canonical(path);
 const ogImage = new URL(image, SITE.url).href;
+
+// The floating Scorecard nudge shows site-wide, except on the Scorecard itself
+// and post-conversion pages.
+const normalizedPath = (path || '/').replace(/\/+$/, '') || '/';
+const showScorecardCta = !['/assessment', '/thank-you', '/contact/success'].includes(
+  normalizedPath,
+);
 ---
 
 <!doctype html>
@@ -105,6 +113,7 @@ const ogImage = new URL(image, SITE.url).href;
       <slot />
     </main>
     <Footer />
+    {showScorecardCta && <ScorecardCta />}
 
     <!-- Lenis smooth scroll + GSAP + motion layer (cursor, parallax, reveals) -->
     <script>
