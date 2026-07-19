@@ -1,8 +1,8 @@
 ---
-import QRCode from 'qrcode';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Ornament from '../components/ui/Ornament.astro';
-import { WHATSAPP, OFFERS } from '../data/site';
+import BookingPlans from '../components/sections/BookingPlans.astro';
+import { SITE, LINKS } from '../data/site';
 import { breadcrumbJsonLd } from '../lib/seo';
 
 const questions = [
@@ -12,18 +12,6 @@ const questions = [
   'I feel mentally exhausted',
   'I feel empty and lost at times',
 ];
-
-// UPI deep link + a self-generated QR (works on desktop by scanning, mobile by tapping).
-const upiUri =
-  `upi://pay?pa=${OFFERS.upiId}` +
-  `&pn=${encodeURIComponent(OFFERS.payeeName)}` +
-  `&am=${OFFERS.masterclassAmount}&cu=INR` +
-  `&tn=${encodeURIComponent('Detox Your Mind Masterclass')}`;
-const upiQr = await QRCode.toDataURL(upiUri, {
-  width: 320,
-  margin: 1,
-  color: { dark: '#22382c', light: '#ffffff' },
-});
 ---
 
 <BaseLayout
@@ -163,66 +151,74 @@ const upiQr = await QRCode.toDataURL(upiUri, {
           </div>
 
           <div class="px-6 py-8 sm:px-10">
-            <!-- LIGHT -->
-            <div data-tier="Light" hidden>
-              <p class="text-center text-3xl" aria-hidden="true">🌿</p>
-              <h2 class="mt-2 text-center font-serif text-2xl text-leaf-900">Light Mental Clutter</h2>
-              <p class="prose-soft mx-auto mt-3 max-w-md text-center">
-                Your mind is mostly balanced — but a few small shifts can create even deeper peace.
-                Here's a gentle tool to keep the calm growing.
+            <!-- score-based hook: meets them exactly where their score says they are -->
+            <div data-tier="Light" hidden class="mx-auto max-w-md text-center">
+              <p class="text-3xl" aria-hidden="true">🌿</p>
+              <h3 class="mt-3 font-serif text-xl text-leaf-900">
+                Your garden is calm — and that's exactly why this moment matters.
+              </h3>
+              <p class="prose-soft mt-3">
+                A low score doesn't mean there's nothing to tend. It means you have
+                something precious to <em>protect</em> — before life's next storm tests it.
               </p>
-              <div class="mt-6 text-center">
-                <a href={OFFERS.mindResetTracker} target="_blank" rel="noopener noreferrer" class="btn-primary">
-                  Download your free 5-Day Mind Reset Tracker
-                </a>
-                <p class="mt-2 text-xs text-ink-muted">Yours free — a simple daily practice for a clearer mind.</p>
-              </div>
+              <p class="prose-soft mt-3">
+                The people who grow the most aren't the ones in crisis. They're the ones
+                who invest in clarity while things are still good. One session with
+                Malavika now is how a good season becomes a lasting one.
+              </p>
+              <p class="mt-4 font-medium text-leaf-900">
+                Don't wait for the weeds. Tend the garden while it blooms. 👇
+              </p>
+            </div>
+            <div data-tier="Moderate" hidden class="mx-auto max-w-md text-center">
+              <p class="text-3xl" aria-hidden="true">🌱</p>
+              <h3 class="mt-3 font-serif text-xl text-leaf-900">
+                You're managing. And that's the most expensive word in your life right now.
+              </h3>
+              <p class="prose-soft mt-3">
+                This score is where most people quietly live for <em>years</em> — a
+                background hum of overthinking, replayed conversations and tiredness that
+                never quite lifts. Not broken enough to stop. Not free enough to breathe.
+              </p>
+              <p class="prose-soft mt-3">
+                Here's the honest truth: this hum doesn't fade on its own — it compounds.
+                And it costs you the very things you're working so hard for: sleep, joy,
+                patience with the people you love.
+              </p>
+              <p class="mt-4 font-medium text-leaf-900">
+                One hour with Malavika can do what another year of “managing” won't. 👇
+              </p>
+            </div>
+            <div data-tier="High" hidden class="mx-auto max-w-md text-center">
+              <p class="text-3xl" aria-hidden="true">🔥</p>
+              <h3 class="mt-3 font-serif text-xl text-leaf-900">
+                You've been strong for everyone. This score is your mind asking —
+                who's there for <em>you</em>?
+              </h3>
+              <p class="prose-soft mt-3">
+                A score like this isn't a flaw. It's a signal — the same one
+                {SITE.peopleImpacted} people brought to Malavika before you: exhausted,
+                overloaded, carrying pain no one around them could see.
+              </p>
+              <p class="prose-soft mt-3">
+                You were never meant to carry this alone. And you don't have to figure it
+                out yourself — you just have to let one conversation begin. Malavika has
+                walked thousands of people from exactly where you are now toward calm.
+              </p>
+              <p class="mt-4 font-medium text-leaf-900">
+                The bravest thing you'll do today takes one click. 👇
+              </p>
             </div>
 
-            <!-- MODERATE -->
-            <div data-tier="Moderate" hidden>
-              <p class="text-center text-3xl" aria-hidden="true">🌱</p>
-              <h2 class="mt-2 text-center font-serif text-2xl text-leaf-900">Moderate Mental Clutter</h2>
-              <p class="prose-soft mx-auto mt-3 max-w-md text-center">
-                You're carrying mental stress and overthinking that's asking for attention.
-                The <strong>Detox Your Mind Masterclass</strong> gives you the tools to clear it.
-              </p>
-              <div class="mx-auto mt-6 max-w-sm rounded-2xl border border-leaf-100 bg-leaf-50/60 p-6 text-center">
-                <p class="font-serif text-lg text-leaf-900">Detox Your Mind Masterclass</p>
-                <p class="mt-1 font-serif text-3xl font-semibold text-leaf-700">{OFFERS.masterclassPrice}</p>
-                <a href={upiUri} class="btn-primary mt-4 w-full">Pay {OFFERS.masterclassPrice} via UPI</a>
-                <p class="mt-4 text-xs text-ink-muted">On a computer? Scan to pay from any UPI app:</p>
-                <img src={upiQr} alt="UPI QR code to pay for the Detox Your Mind Masterclass"
-                  width="160" height="160" class="mx-auto mt-3 h-40 w-40 rounded-xl border border-leaf-100 bg-white p-2" loading="lazy" />
-                <p class="mt-3 text-xs text-ink-muted">
-                  UPI ID: <button type="button" data-copy-upi class="font-semibold text-leaf-700 underline">{OFFERS.upiId}</button>
-                </p>
-                <a id="wa-moderate" href={WHATSAPP.link} target="_blank" rel="noopener noreferrer"
-                  class="mt-4 inline-block text-sm font-semibold text-leaf-700 hover:text-leaf-900">
-                  Or register on WhatsApp →
-                </a>
-              </div>
-            </div>
-
-            <!-- HIGH -->
-            <div data-tier="High" hidden>
-              <p class="text-center text-3xl" aria-hidden="true">🔥</p>
-              <h2 class="mt-2 text-center font-serif text-2xl text-leaf-900">High Mental Toxicity</h2>
-              <p class="prose-soft mx-auto mt-3 max-w-md text-center">
-                Your mind is overloaded and asking for support — and you don't have to carry it alone.
-                Let's talk, gently and without pressure.
-              </p>
-              <div class="mt-6 text-center">
-                <a id="wa-high" href={WHATSAPP.link} target="_blank" rel="noopener noreferrer" class="btn-primary">
-                  Book your free 20-min Clarity Call
-                </a>
-                <p class="mt-2 text-xs text-ink-muted">A calm, confidential conversation with Malavika.</p>
-              </div>
+            <!-- unified next step for every score: book a call with Malavika (pay → form) -->
+            <div class="mt-7">
+              <BookingPlans heading="Book your 1-2-1 with Malavika" intro="Your next step, in two simple parts:" />
             </div>
 
             <p class="mt-8 border-t border-leaf-100 pt-5 text-center text-sm text-ink-muted">
               This scorecard is a gentle self-reflection, not a medical diagnosis.
               <a href="/contact" class="text-leaf-700 underline">Reach out anytime</a> — Malavika is here.
+              Prefer to skip the quiz? <a href={LINKS.bookSession} class="text-leaf-700 underline">Book a session directly</a>.
             </p>
           </div>
         </div>
@@ -333,15 +329,6 @@ const upiQr = await QRCode.toDataURL(upiUri, {
         /* offline / local — still show the result */
       }
 
-      // pre-fill WhatsApp messages with the score
-      const wa = 'https://wa.me/919448455887?text=';
-      const waHigh = document.getElementById('wa-high') as HTMLAnchorElement | null;
-      const waMod = document.getElementById('wa-moderate') as HTMLAnchorElement | null;
-      if (waHigh) waHigh.href = wa + encodeURIComponent(
-        `Hi Malavika, I took the Mind Detox Scorecard and scored ${score}/25 (High). I'd like to book my free 20-min clarity call.`);
-      if (waMod) waMod.href = wa + encodeURIComponent(
-        `Hi Malavika, I took the Mind Detox Scorecard and scored ${score}/25 (Moderate). I'd like to register for the Detox Your Mind Masterclass.`);
-
       if (scoreNum) scoreNum.textContent = String(score);
       if (levelLabel) levelLabel.textContent = levelName[level];
       result?.querySelectorAll<HTMLElement>('[data-tier]').forEach((el) => {
@@ -352,20 +339,6 @@ const upiQr = await QRCode.toDataURL(upiUri, {
       document.getElementById('progress-wrap')?.setAttribute('hidden', '');
       if (result) result.hidden = false;
       result?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-
-    // tap-to-copy the UPI ID
-    const copyBtn = document.querySelector<HTMLButtonElement>('[data-copy-upi]');
-    copyBtn?.addEventListener('click', async () => {
-      const id = copyBtn.textContent?.trim() || '';
-      try {
-        await navigator.clipboard.writeText(id);
-        const original = copyBtn.textContent;
-        copyBtn.textContent = 'Copied ✓';
-        window.setTimeout(() => { copyBtn.textContent = original; }, 1600);
-      } catch (_) {
-        /* clipboard unavailable — the id is still visible to copy manually */
-      }
     });
   }
 </script>

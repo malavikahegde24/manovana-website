@@ -34,6 +34,6 @@ Mind coaching is for **anyone aged 18 to 80** — working professionals, homemak
 
 ## A coach who has walked the path
 
-Malavika Hegde spent over **30 years as an IT professional** before moving "from Systems to Souls." As a dedicated Mind Coach, she has impacted **18,000+ people** through group and one-to-one sessions. (One-to-one sessions are available in **Kannada and English**.)
+Malavika Hegde spent over **30 years as an IT professional** before moving "from Systems to Souls." As a dedicated Mind Coach, she has impacted **21,000+ people** through group and one-to-one sessions. (One-to-one sessions are available in **Kannada and English**.)
 
 If this resonates, [explore how she can help](/services) or [reach out for a conversation](/contact).

@@ -1,5 +1,5 @@
 ---
-import { LINKS, SITE } from '../../data/site';
+import { LINKS } from '../../data/site';
 import Ornament from '../ui/Ornament.astro';
 interface Props {
   heading?: string;
@@ -49,12 +49,12 @@ const {
       <p class="mx-auto mt-4 max-w-xl text-lg italic text-cream/85">{text}</p>
       <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
         <a href={LINKS.bookingUrl} class="btn bg-white text-leaf-700 hover:bg-cream" data-magnetic
-          >Schedule a Consultation</a
+          >Book a Session</a
         >
         <a
-          href={`mailto:${SITE.email}`}
+          href={LINKS.contact}
           class="btn border border-white/40 text-white hover:bg-white/10"
-          data-magnetic>Email Malavika</a
+          data-magnetic>Contact Malavika</a
         >
       </div>
     </div>

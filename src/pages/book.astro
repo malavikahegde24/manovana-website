@@ -1,0 +1,142 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/sections/PageHeader.astro';
+import CtaBand from '../components/sections/CtaBand.astro';
+import BookingPlans from '../components/sections/BookingPlans.astro';
+import { SITE } from '../data/site';
+import { serviceJsonLd, breadcrumbJsonLd } from '../lib/seo';
+
+// One short, real client line as proof — no wall of quotes.
+const proof = (await getCollection('testimonials'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .find((t) => t.data.context.includes('1-to-1'));
+
+// Rapid-fire pain check — each one lands in under a second.
+const pains = [
+  { emoji: '🌀', text: 'Overthinking at 2am' },
+  { emoji: '🔁', text: 'Replaying old conversations' },
+  { emoji: '😶', text: 'Smiling outside, heavy inside' },
+  { emoji: '🔋', text: 'Tired even after rest' },
+];
+
+// The transformation, not the process.
+const shifts = [
+  { from: 'Mental noise', to: 'A quiet mind' },
+  { from: 'Carrying it alone', to: 'Someone in your corner' },
+  { from: 'Stuck in loops', to: 'A clear next step' },
+];
+---
+
+<BaseLayout
+  title="Book a Session with Malavika Hegde | Manovana"
+  description="Book a 1-2-1 session with Mind Coach Malavika Hegde — a 30-min intro call, an ongoing 60-min session, or a package of 4 at 15% off. Pay via UPI, then confirm with a quick form."
+  path="/book"
+  jsonLd={[
+    serviceJsonLd({
+      name: '1-2-1 Session Booking',
+      description: 'Paid 1-2-1 mind coaching sessions with Malavika Hegde — intro call, ongoing session, or a package of 4.',
+      path: '/book',
+    }),
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Book a Session', path: '/book' },
+    ]),
+  ]}
+>
+  <PageHeader
+    eyebrow="Book a session"
+    title="One hour. That's all this asks."
+    subtitle="Not another year of managing it alone."
+    crumbs={[
+      { name: 'Home', href: '/' },
+      { name: 'Book a Session', href: '/book' },
+    ]}
+  />
+
+  <!-- ============ 3-SECOND PAIN CHECK ============ -->
+  <section class="container-content pt-2">
+    <p class="reveal text-sm font-semibold uppercase tracking-wide text-leaf-600">Sound familiar?</p>
+    <div class="mt-4 flex flex-wrap gap-2.5">
+      {
+        pains.map((p) => (
+          <span class="reveal inline-flex items-center gap-2 rounded-full border border-leaf-100 bg-white px-4 py-2 text-sm font-medium text-leaf-900 shadow-sm">
+            <span aria-hidden="true">{p.emoji}</span>
+            {p.text}
+          </span>
+        ))
+      }
+      <span class="reveal inline-flex items-center rounded-full bg-leaf-700 px-4 py-2 text-sm font-semibold text-white">
+        Then this page is for you ↓
+      </span>
+    </div>
+  </section>
+
+  <!-- ============ THE SHIFT — before → after, no paragraphs ============ -->
+  <section class="container-content py-10">
+    <div class="reveal overflow-hidden rounded-[2rem] border border-leaf-100 bg-white shadow-[0_22px_60px_-34px_rgba(91,140,90,0.4)]">
+      <div class="grid sm:grid-cols-3">
+        {
+          shifts.map((s, i) => (
+            <div class:list={['flex flex-col items-center gap-1.5 px-6 py-7 text-center', i > 0 && 'border-t border-leaf-100 sm:border-l sm:border-t-0']}>
+              <span class="text-sm text-ink-muted line-through decoration-leaf-300">{s.from}</span>
+              <svg viewBox="0 0 24 24" class="h-5 w-5 text-leaf-500" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7" /></svg>
+              <span class="font-serif text-xl text-leaf-900">{s.to}</span>
+            </div>
+          ))
+        }
+      </div>
+      <!-- trust bar: who's on the other side of the call -->
+      <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 border-t border-leaf-100 bg-leaf-50/60 px-6 py-4">
+        <span class="flex items-center gap-3">
+          <img src="/images/malavika-avatar.jpg" alt={`${SITE.coach}, ${SITE.role}`} width="44" height="44" class="h-11 w-11 rounded-full border-2 border-white object-cover shadow" loading="lazy" />
+          <span class="text-sm font-semibold text-leaf-900">with {SITE.coach}</span>
+        </span>
+        <span class="text-sm text-ink-soft"><strong class="font-serif text-lg text-leaf-700">{SITE.peopleImpacted}</strong> lives impacted</span>
+        <span class="text-sm text-ink-soft"><strong class="font-serif text-lg text-leaf-700">12+</strong> healing modalities</span>
+        <span class="text-sm text-ink-soft">Kannada &amp; English · 100% private</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE MATH — anchor the price, kill the hesitation ============ -->
+  <section class="container-content pb-10">
+    <div class="reveal mx-auto max-w-2xl rounded-[2rem] bg-gradient-to-br from-leaf-900 to-[#2f4a3c] px-7 py-9 text-center text-white shadow-[0_30px_70px_-30px_rgba(34,56,44,0.7)] sm:px-10">
+      <p class="font-serif text-3xl leading-snug sm:text-4xl">
+        ₹1,499. <span class="italic text-leaf-200">One dinner out.</span>
+      </p>
+      <p class="mx-auto mt-3 max-w-md text-cream/90">
+        Or the 30 minutes that finally puts words to what you've been carrying —
+        and shows you the way through it.
+      </p>
+      <p class="mt-5 inline-flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-sm text-leaf-200">
+        <span>✓ No commitment beyond one call</span>
+        <span>✓ No judgement, ever</span>
+        <span>✓ Booked in 2 minutes</span>
+      </p>
+      {
+        proof && (
+          <p class="mx-auto mt-6 max-w-md border-t border-white/15 pt-5 text-sm italic text-cream/80">
+            “{proof.data.quote}” <span class="not-italic text-cream/60">— {proof.data.name}</span>
+          </p>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="container-content pb-20">
+    <BookingPlans heading="Pick your session" intro="Two steps. Two minutes. Done." />
+
+    <p class="mx-auto mt-8 max-w-md border-t border-leaf-100 pt-5 text-center text-sm text-ink-muted">
+      Not sure which is right for you?
+      <a href={`mailto:${SITE.email}`} class="text-leaf-700 underline">Email Malavika</a> or
+      <a href="/contact" class="text-leaf-700 underline">send a message</a> — she'll help you
+      choose.
+    </p>
+  </section>
+
+  <CtaBand
+    heading="Still deciding?"
+    text="Take the free Mind Detox Scorecard for a gentle, personalised starting point."
+  />
+</BaseLayout>

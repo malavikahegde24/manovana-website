@@ -33,7 +33,7 @@ const milestones = [
 
 <BaseLayout
   title="About Malavika Hegde — Mind Coach | Manovana"
-  description="Meet Malavika Hegde — an IT professional of 30+ years turned Mind Coach who has helped 18,000+ people heal, grow and find inner peace. Her story and approach."
+  description="Meet Malavika Hegde — an IT professional of 30+ years turned Mind Coach who has helped 21,000+ people heal, grow and find inner peace. Her story and approach."
   path="/about"
   type="profile"
   jsonLd={[
@@ -87,21 +87,35 @@ const milestones = [
 
       <aside class="lg:col-span-2">
         <div
+          data-video-wrap
           class="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-leaf-100 bg-gradient-to-br from-sky-100 via-cream to-leaf-100 shadow-md"
         >
-          <!-- TODO(asset): replace with Malavika's high-res profile photo -->
-          <div class="flex h-full flex-col items-center justify-center p-8 text-center">
-            <img
-              src="/images/manovana-logo.png"
-              alt="Manovana emblem — a tree growing within the human mind"
-              width="180"
-              height="180"
-              class="h-44 w-44 object-contain"
-              loading="lazy"
-            />
-            <p class="mt-6 font-serif text-xl text-leaf-900">Malavika Hegde</p>
-            <p class="text-sm text-ink-muted">{SITE.role}</p>
-          </div>
+          <video
+            src="/videos/founder-intro.mp4"
+            poster="/images/malavika-hegde.jpg"
+            controls
+            playsinline
+            preload="none"
+            class="h-full w-full object-cover"
+            aria-label={`Malavika Hegde introduces herself and ${SITE.name}`}
+          />
+          <span
+            data-video-badge
+            class="pointer-events-none absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-black/45 px-3 py-1 text-xs font-medium uppercase tracking-wide text-white backdrop-blur-sm"
+          >
+            <svg viewBox="0 0 24 24" class="h-3 w-3 fill-white" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+            Watch the intro
+          </span>
+          <button
+            type="button"
+            data-video-play
+            aria-label="Play video: Malavika introduces herself and Manovana"
+            class="group absolute inset-0 flex items-center justify-center bg-black/10 transition-colors duration-300 hover:bg-black/20"
+          >
+            <span class="flex h-16 w-16 items-center justify-center rounded-full bg-white/90 shadow-lg transition-transform duration-300 group-hover:scale-105 sm:h-20 sm:w-20">
+              <svg viewBox="0 0 24 24" class="ml-1 h-7 w-7 fill-leaf-700 sm:h-8 sm:w-8" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+            </span>
+          </button>
         </div>
       </aside>
     </div>
@@ -124,47 +138,228 @@ const milestones = [
     </div>
   </section>
 
-  <!-- ============ CERTIFICATIONS ============ -->
-  <section id="certifications" class="container-content scroll-mt-24 py-12">
-    <div class="mb-10 max-w-2xl">
-      <span class="eyebrow">credentials</span>
-      <h2 class="section-title">Certifications &amp; training</h2>
-      <p class="prose-soft mt-3">
-        Malavika's work is grounded in years of accredited training across coaching,
-        counselling and holistic healing. Tap any certificate to view it in full.
-      </p>
+  <!-- ============ CERTIFICATIONS (auto-scrolling; arrows on desktop, swipe on mobile) ============ -->
+  <section id="certifications" class="container-wide scroll-mt-24 py-12">
+    <div class="mb-8 flex flex-wrap items-end justify-between gap-4">
+      <div class="max-w-2xl">
+        <span class="eyebrow">credentials</span>
+        <h2 class="section-title">Certifications &amp; training</h2>
+        <p class="prose-soft mt-3">
+          Malavika's work is grounded in years of accredited training across coaching,
+          counselling and holistic healing. Tap any certificate to view it in full.
+        </p>
+      </div>
+      <div class="hidden shrink-0 gap-2 sm:flex">
+        <button
+          type="button"
+          data-cert-prev
+          aria-label="Previous certificates"
+          class="flex h-11 w-11 items-center justify-center rounded-full border border-leaf-200 bg-white text-leaf-800 transition-colors hover:bg-leaf-50"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
+        </button>
+        <button
+          type="button"
+          data-cert-next
+          aria-label="Next certificates"
+          class="flex h-11 w-11 items-center justify-center rounded-full border border-leaf-200 bg-white text-leaf-800 transition-colors hover:bg-leaf-50"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6" /></svg>
+        </button>
+      </div>
     </div>
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {
-        CERTIFICATIONS.map((c) => (
-          <a
-            href={`/images/certificates/${c.slug}.jpg`}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group reveal flex flex-col overflow-hidden rounded-2xl border border-leaf-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-          >
-            <div class="aspect-[4/3] overflow-hidden bg-leaf-50/60">
-              <img
-                src={`/images/certificates/${c.slug}.jpg`}
-                alt={`${c.title} — certificate awarded to ${SITE.coach}`}
-                width="1100"
-                height="825"
-                loading="lazy"
-                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-              />
-            </div>
-            <div class="flex flex-1 flex-col p-4">
-              <h3 class="font-serif text-base leading-snug text-leaf-900">{c.title}</h3>
-              <p class="mt-1 text-xs text-ink-muted">
-                {c.issuer ? `${c.issuer} · ` : ''}
-                {c.year}
-              </p>
-            </div>
-          </a>
-        ))
-      }
+
+    <div class="cert-marquee">
+      <ul data-cert-track class="cert-track">
+        {
+          CERTIFICATIONS.map((c) => (
+            <li class="cert-card">
+              <a
+                href={`/images/certificates/${c.slug}.jpg`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group flex h-full flex-col overflow-hidden rounded-2xl border border-leaf-100 bg-white shadow-sm transition-shadow duration-300 hover:shadow-md"
+              >
+                <div class="aspect-[4/3] overflow-hidden bg-leaf-50/60">
+                  <img
+                    src={`/images/certificates/${c.slug}.jpg`}
+                    alt={`${c.title} — certificate awarded to ${SITE.coach}`}
+                    width="1100"
+                    height="825"
+                    loading="lazy"
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  />
+                </div>
+                <div class="flex flex-1 flex-col p-4">
+                  <h3 class="font-serif text-base leading-snug text-leaf-900">{c.title}</h3>
+                  <p class="mt-1 text-xs text-ink-muted">
+                    {c.issuer ? `${c.issuer} · ` : ''}
+                    {c.year}
+                  </p>
+                </div>
+              </a>
+            </li>
+          ))
+        }
+        {
+          /* duplicate copy appended in-line so the auto-scroll can loop seamlessly */
+          CERTIFICATIONS.map((c) => (
+            <li class="cert-card" aria-hidden="true">
+              <a
+                href={`/images/certificates/${c.slug}.jpg`}
+                target="_blank"
+                rel="noopener noreferrer"
+                tabindex={-1}
+                class="flex h-full flex-col overflow-hidden rounded-2xl border border-leaf-100 bg-white shadow-sm"
+              >
+                <div class="aspect-[4/3] overflow-hidden bg-leaf-50/60">
+                  <img
+                    src={`/images/certificates/${c.slug}.jpg`}
+                    alt=""
+                    aria-hidden="true"
+                    width="1100"
+                    height="825"
+                    loading="lazy"
+                    class="h-full w-full object-cover"
+                  />
+                </div>
+                <div class="flex flex-1 flex-col p-4">
+                  <h3 class="font-serif text-base leading-snug text-leaf-900">{c.title}</h3>
+                  <p class="mt-1 text-xs text-ink-muted">
+                    {c.issuer ? `${c.issuer} · ` : ''}
+                    {c.year}
+                  </p>
+                </div>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </section>
+
+  <style>
+    /* hide the browser's own centered "big play" button so only our custom
+       overlay shows — Chrome/Edge/Safari render one by default over the poster */
+    video::-webkit-media-controls-overlay-play-button,
+    video::-webkit-media-controls-start-playback-button {
+      display: none !important;
+    }
+    /* the [hidden] attribute loses to Tailwind's .flex (author vs. author, same
+       specificity, source order) unless forced — make sure hiding actually hides */
+    [data-video-play][hidden],
+    [data-video-badge][hidden] {
+      display: none !important;
+    }
+
+    .cert-marquee {
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
+    }
+    .cert-track {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      padding: 0.25rem 0.25rem 1rem;
+      scrollbar-width: none;
+      touch-action: pan-x;
+    }
+    .cert-track::-webkit-scrollbar {
+      display: none;
+    }
+    .cert-card {
+      width: 260px;
+      flex-shrink: 0;
+    }
+    @media (min-width: 640px) {
+      .cert-card { width: 300px; }
+    }
+  </style>
+
+  <script>
+    // Founder video: swap the poster's play overlay for the native controls once played.
+    document.querySelectorAll<HTMLElement>('[data-video-wrap]').forEach((wrap) => {
+      const video = wrap.querySelector<HTMLVideoElement>('video');
+      const playBtn = wrap.querySelector<HTMLButtonElement>('[data-video-play]');
+      const badge = wrap.querySelector<HTMLElement>('[data-video-badge]');
+      if (!video || !playBtn) return;
+
+      const hideOverlay = () => {
+        playBtn.hidden = true;
+        if (badge) badge.hidden = true;
+      };
+      const showOverlay = () => {
+        playBtn.hidden = false;
+        if (badge) badge.hidden = false;
+      };
+
+      playBtn.addEventListener('click', () => void video.play());
+      video.addEventListener('play', hideOverlay);
+      video.addEventListener('ended', showOverlay);
+    });
+
+    // Certifications: auto-scrolling loop (paused on hover/touch/focus), with
+    // desktop prev/next arrows and native touch swipe on the same scroll container.
+    const track = document.querySelector<HTMLElement>('[data-cert-track]');
+    const prev = document.querySelector<HTMLButtonElement>('[data-cert-prev]');
+    const next = document.querySelector<HTMLButtonElement>('[data-cert-next]');
+
+    if (track) {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      let halfWidth = 0;
+      const measure = () => {
+        halfWidth = track.scrollWidth / 2;
+      };
+      measure();
+      window.addEventListener('resize', measure);
+
+      let paused = false;
+      let resumeTimer: ReturnType<typeof setTimeout>;
+      const pause = () => {
+        paused = true;
+        clearTimeout(resumeTimer);
+      };
+      const scheduleResume = (delay = 1400) => {
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(() => {
+          paused = false;
+        }, delay);
+      };
+
+      track.addEventListener('pointerenter', pause);
+      track.addEventListener('pointerleave', () => scheduleResume(200));
+      track.addEventListener('touchstart', pause, { passive: true });
+      track.addEventListener('touchend', () => scheduleResume(), { passive: true });
+      track.addEventListener('focusin', pause);
+      track.addEventListener('focusout', () => scheduleResume());
+
+      const step = () => {
+        const card = track.querySelector('li');
+        const gap = 24;
+        return card ? (card.getBoundingClientRect().width + gap) * 2 : track.clientWidth * 0.8;
+      };
+      const jump = (dir: 1 | -1) => {
+        pause();
+        track.scrollBy({ left: dir * step(), behavior: 'smooth' });
+        scheduleResume(2600);
+      };
+      prev?.addEventListener('click', () => jump(-1));
+      next?.addEventListener('click', () => jump(1));
+
+      if (!prefersReduced) {
+        const speed = 0.5; // px per frame
+        const tick = () => {
+          if (!paused) {
+            track.scrollLeft += speed;
+            if (track.scrollLeft >= halfWidth) track.scrollLeft -= halfWidth;
+          }
+          requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }
+    }
+  </script>
 
   <CtaBand
     heading="Begin your healing journey"

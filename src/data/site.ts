@@ -14,12 +14,12 @@ export const SITE = {
   shortTagline: 'Heal. Grow. Bloom your Mind Garden.',
   description:
     'Manovana is the mind-coaching practice of Malavika Hegde, helping people heal emotional pain, break limiting patterns, and find inner peace through meditation, NLP, hypnotherapy, EFT and more.',
-  peopleImpacted: '18,000+',
+  peopleImpacted: '21,000+',
   email: 'malavikahegde24@gmail.com',
   // Phone is intentionally NOT published on the website (per client notes).
   languages: ['Kannada', 'English'],
   locale: 'en_IN',
-  region: 'Karnataka, India',
+  region: 'Bangalore, India',
 } as const;
 
 export const SOCIAL = {
@@ -29,14 +29,14 @@ export const SOCIAL = {
 
 /**
  * CTA / external integration URLs.
- * TODO(asset): replace `bookingUrl` with the real Cal.com scheduling link.
  * TODO(asset): replace `registrationUrl` with the Google Form link (Phase 2).
  */
 export const LINKS = {
-  bookingUrl: '/schedule', // dedicated scheduling route (Cal.com embed)
+  bookingUrl: '/book', // all book/schedule CTAs point at the paid-session booking page
   registrationUrl: '/contact', // masterclass registration deferred to Phase 2
   contact: '/contact',
   assessment: '/assessment', // free Mind Detox Scorecard
+  bookSession: '/book', // paid 1-2-1 session booking (pay via UPI → confirm via form)
 } as const;
 
 /**
@@ -50,15 +50,36 @@ export const WHATSAPP = {
 } as const;
 
 /**
- * Free / paid offerings surfaced by the Mind Detox Scorecard results.
- * The masterclass UPI QR is generated at build time from these values.
+ * Paid sessions with Malavika, surfaced by the Mind Detox Scorecard result.
+ * Flow: pick a plan → pay via UPI (QR generated at build time) → fill the
+ * Google Form with details + payment screenshot to confirm the booking.
  */
 export const OFFERS = {
-  mindResetTracker: 'https://canva.link/6rmnj7f02umc94g',
-  masterclassAmount: 299,
-  masterclassPrice: '₹299',
   upiId: 'malavikahegde24@okhdfcbank',
   payeeName: 'Malavika Hegde',
+  bookingFormUrl:
+    'https://docs.google.com/forms/d/e/1FAIpQLSeWqOFVlvy2v8ONQ3_EBg8wwi0uZ3kGybBJ9leizH3QI0Lg5w/viewform',
+  plans: [
+    { id: 'intro', label: 'First 30 min call', price: '₹1,499', amount: 1499 },
+    { id: 'session', label: 'Ongoing 60 min 1-2-1 session', price: '₹3,500', amount: 3500 },
+    {
+      id: 'package4',
+      label: 'Package of 4 sessions',
+      price: '₹11,999',
+      amount: 11999,
+      originalPrice: '₹14,000', // 4 × ₹3,500 — the reference price the 15% discount is off
+      discount: 'Save 15%',
+    },
+  ],
+} as const;
+
+/**
+ * Free gifts. The guided meditation is served from our own /public/audio and
+ * downloaded directly when a visitor leaves their email on the homepage.
+ */
+export const FREEBIES = {
+  meditationAudioUrl: '/audio/detox-your-mind-guided-meditation.mp4',
+  meditationFileName: 'Detox Your Mind — Guided Meditation by Malavika Hegde.mp4',
 } as const;
 
 /**

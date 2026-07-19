@@ -50,7 +50,7 @@ const isActive = (href: string) =>
     </ul>
 
     <div class="hidden shrink-0 lg:block">
-      <a href={LINKS.bookingUrl} class="btn-primary whitespace-nowrap px-6 py-2.5 text-sm" data-magnetic>Schedule</a>
+      <a href={LINKS.bookSession} class="btn-primary whitespace-nowrap px-6 py-2.5 text-sm" data-magnetic>Book a Session</a>
     </div>
 
     <button
@@ -108,7 +108,37 @@ const isActive = (href: string) =>
           </a>
         ))
       }
-      <a href={LINKS.bookingUrl} class="btn-primary mt-4">Schedule a Consultation</a>
+
+      <!-- Free gifts (mobile drawer only) -->
+      <p class="mt-4 px-3 text-xs font-semibold uppercase tracking-wide text-leaf-600">Free gifts</p>
+      <a
+        href={LINKS.assessment}
+        class="flex items-center gap-3 rounded-xl bg-leaf-100/60 px-3 py-3 text-base font-medium text-leaf-900 hover:bg-leaf-100"
+        data-drawer-link
+      >
+        <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-leaf-700">
+          <svg viewBox="0 0 24 24" class="h-4 w-4 fill-[#f4b740] stroke-[#e0a020]" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 18.9 6.1 21.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg>
+        </span>
+        <span class="leading-tight">
+          Free Mind Detox Scorecard
+          <span class="block text-xs font-normal text-ink-muted">2-min self check</span>
+        </span>
+      </a>
+      <a
+        href="/#free-gifts"
+        class="flex items-center gap-3 rounded-xl bg-leaf-100/60 px-3 py-3 text-base font-medium text-leaf-900 hover:bg-leaf-100"
+        data-drawer-link
+      >
+        <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-leaf-700">
+          <svg viewBox="0 0 24 24" class="ml-0.5 h-3.5 w-3.5" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+        </span>
+        <span class="leading-tight">
+          Free Guided Meditation
+          <span class="block text-xs font-normal text-ink-muted">Detox your mind</span>
+        </span>
+      </a>
+
+      <a href={LINKS.bookSession} class="btn-primary mt-4">Book a Session</a>
     </div>
   </div>
 

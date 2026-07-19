@@ -5,7 +5,7 @@ metaTitle: Coaching for Relationship Issues | Manovana
 metaDescription: Heal relationship wounds and repeating patterns with Mind Coach Malavika Hegde using forgiveness therapy and karmic cleansing.
 icon: users
 order: 3
-relatedTechniques: ['forgiveness-therapy', 'karmic-cleansing', 'healing-childhood-trauma']
+relatedTechniques: ['forgiveness-therapy', 'karmic-cleansing', 'inner-child-healing']
 faqs:
   - question: Can coaching help if the other person won't change?
     answer: Yes. Much relationship healing happens within you — releasing resentment, breaking your side of a pattern, and showing up differently. That shift alone often transforms the dynamic.

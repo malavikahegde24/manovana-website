@@ -1,9 +1,9 @@
 ---
-title: Healing Childhood Trauma
-shortTitle: Childhood Trauma
+title: Inner Child Healing
+shortTitle: Inner Child Healing
 summary: Gently revisit and heal the early experiences that still shape your fears, relationships and self-worth today.
-metaTitle: Healing Childhood Trauma | Manovana
-metaDescription: Heal the roots of present-day pain with childhood-trauma healing by Mind Coach Malavika Hegde. Compassionate, safe, and paced for you.
+metaTitle: Inner Child Healing | Manovana
+metaDescription: Heal the roots of present-day pain with inner child healing by Mind Coach Malavika Hegde. Compassionate, safe, and paced for you.
 icon: sprout
 order: 7
 helpsWith: ['Relationship Issues', 'Loneliness & Depression', 'Breaking Limiting Beliefs']
@@ -16,7 +16,7 @@ faqs:
 
 ## What it is
 
-So much of adult struggle traces back to early wounds — moments where we learned, often unconsciously, that we were not safe, not enough, or not lovable. Healing childhood trauma gently addresses these roots rather than only managing the symptoms.
+So much of adult struggle traces back to early wounds — moments where we learned, often unconsciously, that we were not safe, not enough, or not lovable. Inner child healing gently addresses these roots rather than only managing the symptoms.
 
 ## How it works
 

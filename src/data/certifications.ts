@@ -1,8 +1,8 @@
 /**
- * Malavika's professional certifications.
+ * Malavika's professional certifications, most recent first.
  * Images are self-contained in /public/images/certificates.
  * `short` is used for the homepage credential badges; the full record powers the
- * certificate gallery on /about.
+ * certificate carousel on /about.
  */
 export interface Certification {
   slug: string;
@@ -13,20 +13,6 @@ export interface Certification {
 }
 
 export const CERTIFICATIONS: Certification[] = [
-  {
-    slug: 'compassion-key-master',
-    title: 'Compassion Key — Master Practitioner',
-    issuer: 'The Compassion Key®',
-    year: '2025',
-    short: 'Compassion Key Master',
-  },
-  {
-    slug: 'coaching-certification',
-    title: 'Coaching Certification 1·2·1 — 75 hrs',
-    issuer: 'Life By Design',
-    year: '2025',
-    short: 'Certified Coach',
-  },
   {
     slug: 'enlightened-coach',
     title: 'Certified Enlightened Coach',
@@ -42,25 +28,18 @@ export const CERTIFICATIONS: Certification[] = [
     short: 'Relationship Expert',
   },
   {
-    slug: 'holistic-healing',
-    title: 'Holistic Healing Therapy — 108 hrs',
-    issuer: 'Spiritual Solutions Centre',
-    year: '2022',
-    short: 'Holistic Healing Therapist',
+    slug: 'coaching-certification',
+    title: 'Coaching Certification 1·2·1 — 75 hrs',
+    issuer: 'Life By Design',
+    year: '2025',
+    short: 'Certified Coach',
   },
   {
-    slug: 'compassion-key-level1',
-    title: 'Compassion Key — Level I Practitioner',
+    slug: 'compassion-key-master',
+    title: 'Compassion Key — Master Practitioner',
     issuer: 'The Compassion Key®',
-    year: '2024',
-    short: 'Compassion Key Practitioner',
-  },
-  {
-    slug: 'reiki-advanced',
-    title: 'Usui Reiki — Advanced (Usui Shiki Ryoho)',
-    issuer: 'Traditional & Karuna Reiki',
-    year: '2024',
-    short: 'Advanced Reiki',
+    year: '2025',
+    short: 'Compassion Key Master',
   },
   {
     slug: 'reiki-usui-basics',
@@ -70,10 +49,17 @@ export const CERTIFICATIONS: Certification[] = [
     short: 'Usui Reiki',
   },
   {
-    slug: 'karuna-reiki',
-    title: 'Karuna Reiki — I & II Degree',
-    issuer: 'Traditional Reiki',
-    year: '2005',
-    short: 'Karuna Reiki',
+    slug: 'reiki-advanced',
+    title: 'Usui Reiki — Advanced (Usui Shiki Ryoho)',
+    issuer: 'Traditional & Karuna Reiki',
+    year: '2024',
+    short: 'Advanced Reiki',
+  },
+  {
+    slug: 'holistic-healing',
+    title: 'Holistic Healing Therapy — 108 hrs',
+    issuer: 'Spiritual Solutions Centre',
+    year: '2022',
+    short: 'Holistic Healing Therapist',
   },
 ];

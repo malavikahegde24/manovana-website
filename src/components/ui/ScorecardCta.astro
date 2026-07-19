@@ -77,10 +77,11 @@ import { LINKS } from '../../data/site';
 </div>
 
 <script>
-  const KEY = 'manovana:scorecard-cta-dismissed';
+  // Dismissal is intentionally NOT persisted — the nudge reappears on every
+  // page load/refresh, and clicking dismiss only hides it for the current view.
   const ctas = Array.from(document.querySelectorAll<HTMLElement>('[data-scorecard-cta]'));
 
-  if (ctas.length && localStorage.getItem(KEY) !== '1') {
+  if (ctas.length) {
     const shownCls = ['opacity-100', 'translate-y-0', 'pointer-events-auto'];
 
     const show = () =>
@@ -96,9 +97,10 @@ import { LINKS } from '../../data/site';
         el.classList.add(el.classList.contains('lg:hidden') ? 'translate-y-full' : 'translate-y-8');
       });
 
+    let dismissed = false;
     let shown = false;
     const onScroll = () => {
-      if (!shown && window.scrollY > 460) {
+      if (!dismissed && !shown && window.scrollY > 460) {
         show();
         shown = true;
       }
@@ -109,8 +111,8 @@ import { LINKS } from '../../data/site';
     document.querySelectorAll('[data-cta-close]').forEach((btn) =>
       btn.addEventListener('click', (e) => {
         e.preventDefault();
+        dismissed = true;
         hide();
-        localStorage.setItem(KEY, '1');
         window.removeEventListener('scroll', onScroll);
       }),
     );

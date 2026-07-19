@@ -5,7 +5,7 @@ metaTitle: Breaking Limiting Beliefs Coaching | Manovana
 metaDescription: Break free of limiting beliefs and self-sabotage with Mind Coach Malavika Hegde using NLP, hypnotherapy and inner-child healing.
 icon: unlock
 order: 7
-relatedTechniques: ['nlp', 'hypnotherapy', 'healing-childhood-trauma']
+relatedTechniques: ['nlp', 'hypnotherapy', 'inner-child-healing']
 faqs:
   - question: What is a limiting belief?
     answer: It's a deeply held, often unconscious story about yourself or the world — such as "I'm not enough" — that quietly shapes your choices and holds you back.

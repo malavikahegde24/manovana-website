@@ -2,30 +2,30 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/sections/PageHeader.astro';
 import Icon from '../components/ui/Icon.astro';
-import { SITE, SOCIAL, SCHEDULING } from '../data/site';
+import { SITE, SOCIAL, SCHEDULING, LINKS } from '../data/site';
 import { breadcrumbJsonLd } from '../lib/seo';
 
 const calLink = SCHEDULING.calLink;
 ---
 
 <BaseLayout
-  title="Schedule a Consultation | Manovana"
-  description="Book a consultation with Mind Coach Malavika Hegde. Choose a time that suits you and take the first step toward clarity, calm and lasting inner peace."
+  title="Book a Session | Manovana"
+  description="Book a session with Mind Coach Malavika Hegde. Choose a time that suits you and take the first step toward clarity, calm and lasting inner peace."
   path="/schedule"
   jsonLd={[
     breadcrumbJsonLd([
       { name: 'Home', path: '/' },
-      { name: 'Schedule', path: '/schedule' },
+      { name: 'Book a Session', path: '/schedule' },
     ]),
   ]}
 >
   <PageHeader
     eyebrow="Begin"
-    title="Schedule a consultation"
+    title="Book a session"
     subtitle="Choose a time that works for you. The first conversation is gentle, unhurried, and entirely about you — share as much or as little as feels right."
     crumbs={[
       { name: 'Home', href: '/' },
-      { name: 'Schedule', href: '/schedule' },
+      { name: 'Book a Session', href: '/schedule' },
     ]}
   />
 
@@ -42,19 +42,20 @@ const calLink = SCHEDULING.calLink;
           <span class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-leaf-100 text-leaf-700">
             <Icon name="calendar" size={26} />
           </span>
-          <h2 class="mt-5 font-serif text-2xl text-leaf-900">Online booking is being set up</h2>
+          <h2 class="mt-5 font-serif text-2xl text-leaf-900">Book a session directly</h2>
           <p class="prose-soft mx-auto mt-3 max-w-md">
-            In the meantime, email Malavika directly and she'll personally arrange a time
-            that suits you — usually within a day.
+            Online calendar booking is being set up. In the meantime, book a paid 1-2-1
+            session directly — choose a plan, pay via UPI, and confirm with a quick form.
           </p>
           <div class="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a href={`mailto:${SITE.email}?subject=Consultation%20request`} class="btn-primary" data-magnetic>
-              Email to schedule
+            <a href={LINKS.bookSession} class="btn-primary" data-magnetic>Book a session</a>
+            <a href={`mailto:${SITE.email}?subject=Consultation%20request`} class="btn-secondary" data-magnetic>
+              Email Malavika
             </a>
-            <a href="/contact" class="btn-secondary" data-magnetic>Send a message</a>
           </div>
           <p class="mt-5 text-sm text-ink-muted">
-            Or reach out on Instagram —
+            Or <a href="/contact" class="text-leaf-700 underline">send a message</a>, or reach
+            out on Instagram —
             <a class="text-leaf-700 underline" href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer">
               {SOCIAL.instagramHandle}
             </a>
