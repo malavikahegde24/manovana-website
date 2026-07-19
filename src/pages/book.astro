@@ -10,7 +10,7 @@ import { serviceJsonLd, breadcrumbJsonLd } from '../lib/seo';
 // One short, real client line as proof — no wall of quotes.
 const proof = (await getCollection('testimonials'))
   .sort((a, b) => a.data.order - b.data.order)
-  .find((t) => t.data.context.includes('1-to-1'));
+  .find((t) => t.data.context?.includes('1-to-1'));
 
 // Rapid-fire pain check — each one lands in under a second.
 const pains = [
@@ -30,12 +30,12 @@ const shifts = [
 
 <BaseLayout
   title="Book a Session with Malavika Hegde | Manovana"
-  description="Book a 1-2-1 session with Mind Coach Malavika Hegde — a 30-min intro call, an ongoing 60-min session, or a package of 4 at 15% off. Pay via UPI, then confirm with a quick form."
+  description="Book a 30-min 1-2-1 session with Mind Coach Malavika Hegde. Pay via UPI, then confirm with a quick form."
   path="/book"
   jsonLd={[
     serviceJsonLd({
       name: '1-2-1 Session Booking',
-      description: 'Paid 1-2-1 mind coaching sessions with Malavika Hegde — intro call, ongoing session, or a package of 4.',
+      description: 'Paid 30-min 1-2-1 mind coaching intro session with Malavika Hegde.',
       path: '/book',
     }),
     breadcrumbJsonLd([
@@ -106,7 +106,7 @@ const shifts = [
         ₹1,499. <span class="italic text-leaf-200">One dinner out.</span>
       </p>
       <p class="mx-auto mt-3 max-w-md text-cream/90">
-        Or the 30 minutes that finally puts words to what you've been carrying —
+        Or the 30 minutes that finally puts words to what you've been carrying, 
         and shows you the way through it.
       </p>
       <p class="mt-5 inline-flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-sm text-leaf-200">
@@ -117,7 +117,7 @@ const shifts = [
       {
         proof && (
           <p class="mx-auto mt-6 max-w-md border-t border-white/15 pt-5 text-sm italic text-cream/80">
-            “{proof.data.quote}” <span class="not-italic text-cream/60">— {proof.data.name}</span>
+            “{proof.data.quote}”<span class="not-italic text-cream/60">, {proof.data.name}</span>
           </p>
         )
       }
@@ -125,12 +125,12 @@ const shifts = [
   </section>
 
   <section class="container-content pb-20">
-    <BookingPlans heading="Pick your session" intro="Two steps. Two minutes. Done." />
+    <BookingPlans heading="Book your session" intro="Takes two minutes." />
 
     <p class="mx-auto mt-8 max-w-md border-t border-leaf-100 pt-5 text-center text-sm text-ink-muted">
       Not sure which is right for you?
       <a href={`mailto:${SITE.email}`} class="text-leaf-700 underline">Email Malavika</a> or
-      <a href="/contact" class="text-leaf-700 underline">send a message</a> — she'll help you
+      <a href="/contact" class="text-leaf-700 underline">send a message</a>, she'll help you
       choose.
     </p>
   </section>

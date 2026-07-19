@@ -15,8 +15,8 @@ faqs:
 
 ## From reaction to response
 
-When fear or anger takes over, it can feel like something else is at the wheel — and the regret afterwards only deepens the cycle. These reactions are not character flaws; they are patterns, and patterns can change.
+When fear or anger takes over, it can feel like something else is at the wheel, and the regret afterwards only deepens the cycle. These reactions are not character flaws; they are patterns, and patterns can change.
 
 ## How Malavika helps
 
-Using **NLP**, **EFT** and **hypnotherapy**, Malavika helps you reach the triggers beneath the reaction, discharge their intensity, and build new, empowered responses. You learn to feel the emotion without being ruled by it — turning reactive patterns into conscious, grounded choices.
+Using **NLP**, **EFT** and **hypnotherapy**, Malavika helps you reach the triggers beneath the reaction, discharge their intensity, and build new, empowered responses. You learn to feel the emotion without being ruled by it, turning reactive patterns into conscious, grounded choices.

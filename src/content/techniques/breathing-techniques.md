@@ -16,7 +16,7 @@ faqs:
 
 ## What it is
 
-Your breath is the one part of the nervous system you can consciously steer. Breathing techniques use deliberate rhythms of inhale, hold and exhale to shift your body out of "fight or flight" and into calm — no app, no equipment, just you.
+Your breath is the one part of the nervous system you can consciously steer. Breathing techniques use deliberate rhythms of inhale, hold and exhale to shift your body out of "fight or flight" and into calm, no app, no equipment, just you.
 
 ## How it works
 
@@ -24,4 +24,4 @@ When you slow and lengthen the exhale, you signal safety to the nervous system. 
 
 ## How Malavika works with you
 
-Malavika teaches simple, practical breathwork you can use before a meeting, during conflict, or when sleep won't come — woven together with meditation and mindfulness for a deeper, lasting calm.
+Malavika teaches simple, practical breathwork you can use before a meeting, during conflict, or when sleep won't come, woven together with meditation and mindfulness for a deeper, lasting calm.

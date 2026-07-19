@@ -9,14 +9,14 @@ order: 5
 helpsWith: ['Loneliness & Depression', 'Stress & Anxiety', 'Passion & Goals']
 faqs:
   - question: Is gratitude just positive thinking?
-    answer: No. Gratitude therapy is a trained practice of attention that measurably shifts mood and perspective over time — it works with reality, not in denial of it.
+    answer: No. Gratitude therapy is a trained practice of attention that measurably shifts mood and perspective over time, it works with reality, not in denial of it.
   - question: How do I stay grateful when life is genuinely hard?
-    answer: Malavika teaches gentle, realistic practices that begin with small, true things — so gratitude becomes a steady anchor even during difficult seasons.
+    answer: Malavika teaches gentle, realistic practices that begin with small, true things, so gratitude becomes a steady anchor even during difficult seasons.
 ---
 
 ## What it is
 
-The mind has a natural negativity bias — it scans for what is missing or wrong. Gratitude Therapy deliberately rebalances that, training your attention toward what is present, good, and already enough.
+The mind has a natural negativity bias, it scans for what is missing or wrong. Gratitude Therapy deliberately rebalances that, training your attention toward what is present, good, and already enough.
 
 ## How it works
 
@@ -24,4 +24,4 @@ Through structured gratitude practices and reflection, you build new mental path
 
 ## How Malavika works with you
 
-Malavika helps you move from striving with no inner happiness to a felt sense of fullness — weaving gratitude into daily life so joy stops depending on circumstances.
+Malavika helps you move from striving with no inner happiness to a felt sense of fullness, weaving gratitude into daily life so joy stops depending on circumstances.

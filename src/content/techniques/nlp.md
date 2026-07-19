@@ -1,7 +1,7 @@
 ---
 title: Neuro Linguistic Programming (NLP)
 shortTitle: NLP
-summary: Reprogram the unconscious patterns of thought and language that shape how you feel, decide, and act — so you can break free of limiting habits.
+summary: Reprogram the unconscious patterns of thought and language that shape how you feel, decide, and act, so you can break free of limiting habits.
 metaTitle: NLP Coaching (Neuro Linguistic Programming) | Manovana
 metaDescription: Work with NLP and Mind Coach Malavika Hegde to rewire limiting beliefs, change unhelpful patterns and build confidence.
 icon: git-branch
@@ -9,14 +9,14 @@ order: 3
 helpsWith: ['Breaking Limiting Beliefs', 'Clarity & Confidence', 'Fear & Uncontrolled Anger']
 faqs:
   - question: What is NLP in simple terms?
-    answer: NLP studies the link between how we think (neuro), the language we use (linguistic) and our learned patterns of behaviour (programming) — and offers practical tools to change patterns that no longer serve you.
+    answer: NLP studies the link between how we think (neuro), the language we use (linguistic) and our learned patterns of behaviour (programming), and offers practical tools to change patterns that no longer serve you.
   - question: Is NLP suitable for confidence and habits?
     answer: Yes. NLP techniques are widely used to dissolve limiting beliefs, manage emotional states, and build new, empowering habits of thought.
 ---
 
 ## What it is
 
-Neuro Linguistic Programming explores the connection between your **thoughts**, your **language**, and your **behaviour**. Many of the patterns that hold us back run silently in the background — NLP brings them into the light so they can be reshaped.
+Neuro Linguistic Programming explores the connection between your **thoughts**, your **language**, and your **behaviour**. Many of the patterns that hold us back run silently in the background, NLP brings them into the light so they can be reshaped.
 
 ## How it works
 

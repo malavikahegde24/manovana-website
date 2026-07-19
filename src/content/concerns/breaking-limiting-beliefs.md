@@ -8,14 +8,14 @@ order: 7
 relatedTechniques: ['nlp', 'hypnotherapy', 'inner-child-healing']
 faqs:
   - question: What is a limiting belief?
-    answer: It's a deeply held, often unconscious story about yourself or the world — such as "I'm not enough" — that quietly shapes your choices and holds you back.
+    answer: It's a deeply held, often unconscious story about yourself or the world, such as "I'm not enough", that quietly shapes your choices and holds you back.
   - question: Why is willpower not enough to change these patterns?
     answer: Limiting beliefs live in the subconscious, so conscious effort alone rarely shifts them. NLP and hypnotherapy work at that deeper level where lasting change happens.
 ---
 
 ## The invisible barriers holding you back
 
-The biggest obstacles are often the ones we can't see — silent beliefs like *"I'm not enough,"* *"I don't deserve this,"* or *"it's too late for me."* These stories run in the background, driving self-sabotage and keeping you stuck in negative thinking patterns.
+The biggest obstacles are often the ones we can't see, silent beliefs like *"I'm not enough,"* *"I don't deserve this,"* or *"it's too late for me."* These stories run in the background, driving self-sabotage and keeping you stuck in negative thinking patterns.
 
 ## How Malavika helps
 

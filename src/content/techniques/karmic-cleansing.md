@@ -15,7 +15,7 @@ faqs:
 
 ## What it is
 
-Some patterns seem to follow us — the same kind of relationship, the same conflict, the same emotional knot, again and again. Karmic cleansing is the work of recognising these cycles and consciously releasing the charge that keeps them repeating.
+Some patterns seem to follow us, the same kind of relationship, the same conflict, the same emotional knot, again and again. Karmic cleansing is the work of recognising these cycles and consciously releasing the charge that keeps them repeating.
 
 ## How it works
 
@@ -23,4 +23,4 @@ By bringing awareness to entangled relationships and recurring emotional pattern
 
 ## How Malavika works with you
 
-Malavika helps you free yourself from karmic relationships and the emotional baggage that keeps replaying — so you can step into healthier, more conscious connections.
+Malavika helps you free yourself from karmic relationships and the emotional baggage that keeps replaying, so you can step into healthier, more conscious connections.

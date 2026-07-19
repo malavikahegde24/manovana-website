@@ -16,7 +16,7 @@ faqs:
 
 ## What it is
 
-Some fears, blocks and relationship patterns feel strangely deep — as if their roots reach back further than anything we can consciously remember. Past Life Regression is a guided, deeply relaxed process for gently exploring and releasing these long-held impressions.
+Some fears, blocks and relationship patterns feel strangely deep, as if their roots reach back further than anything we can consciously remember. Past Life Regression is a guided, deeply relaxed process for gently exploring and releasing these long-held impressions.
 
 ## How it works
 
@@ -24,4 +24,4 @@ In a calm, supported state, you explore the imagery and emotion the mind brings 
 
 ## How Malavika works with you
 
-Malavika offers Past Life Regression as a safe, gentle inner journey for those whose patterns haven't shifted through other approaches — always paced for your comfort.
+Malavika offers Past Life Regression as a safe, gentle inner journey for those whose patterns haven't shifted through other approaches, always paced for your comfort.

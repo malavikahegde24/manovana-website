@@ -21,7 +21,7 @@ Manifestation is the practice of aligning what you think, what you feel, and wha
 
 ## How it works
 
-You first get honest clarity on what you actually want. Then the deeper work begins — clearing the limiting beliefs and unresolved emotions that quietly oppose your goal — so your daily actions and inner state finally point the same way.
+You first get honest clarity on what you actually want. Then the deeper work begins, clearing the limiting beliefs and unresolved emotions that quietly oppose your goal, so your daily actions and inner state finally point the same way.
 
 ## How Malavika works with you
 

@@ -71,6 +71,9 @@
             "additionalProperties": false
           },
           "default": []
+        },
+        "$schema": {
+          "type": "string"
         }
       },
       "required": [
