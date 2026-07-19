@@ -90,10 +90,12 @@ const milestones = [
           data-video-wrap
           class="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-leaf-100 bg-gradient-to-br from-sky-100 via-cream to-leaf-100 shadow-md"
         >
+          <!-- `controls` is intentionally absent until playback starts (added via JS):
+               it would render the browser's own big play button under our overlay, and
+               hiding that with CSS breaks the native play/pause controls on mobile. -->
           <video
             src="/videos/founder-intro.mp4"
             poster="/images/malavika-hegde.jpg"
-            controls
             playsinline
             preload="none"
             class="h-full w-full object-cover"
@@ -239,12 +241,6 @@ const milestones = [
   </section>
 
   <style>
-    /* hide the browser's own centered "big play" button so only our custom
-       overlay shows — Chrome/Edge/Safari render one by default over the poster */
-    video::-webkit-media-controls-overlay-play-button,
-    video::-webkit-media-controls-start-playback-button {
-      display: none !important;
-    }
     /* the [hidden] attribute loses to Tailwind's .flex (author vs. author, same
        specificity, source order) unless forced — make sure hiding actually hides */
     [data-video-play][hidden],
@@ -277,7 +273,10 @@ const milestones = [
   </style>
 
   <script>
-    // Founder video: swap the poster's play overlay for the native controls once played.
+    // Founder video: our overlay owns the poster state; native controls take over
+    // once playback starts (controls are enabled here, not in the markup, so the
+    // browser's own big play button never fights the overlay — and mobile keeps
+    // its fully working native play/pause UI).
     document.querySelectorAll<HTMLElement>('[data-video-wrap]').forEach((wrap) => {
       const video = wrap.querySelector<HTMLVideoElement>('video');
       const playBtn = wrap.querySelector<HTMLButtonElement>('[data-video-play]');
@@ -293,9 +292,15 @@ const milestones = [
         if (badge) badge.hidden = false;
       };
 
-      playBtn.addEventListener('click', () => void video.play());
+      playBtn.addEventListener('click', () => {
+        video.controls = true;
+        void video.play();
+      });
       video.addEventListener('play', hideOverlay);
-      video.addEventListener('ended', showOverlay);
+      video.addEventListener('ended', () => {
+        video.controls = false;
+        showOverlay();
+      });
     });
 
     // Certifications: auto-scrolling loop (paused on hover/touch/focus), with
