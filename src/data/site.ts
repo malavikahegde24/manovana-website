@@ -15,7 +15,7 @@ export const SITE = {
   description:
     'Manovana is the mind-coaching practice of Malavika Hegde, helping people heal emotional pain, break limiting patterns, and find inner peace through meditation, NLP, hypnotherapy, EFT and more.',
   peopleImpacted: '21,000+',
-  email: 'malavikahegde24@gmail.com',
+  email: 'support@manovana.com',
   // Phone is intentionally NOT published on the website (per client notes).
   languages: ['Kannada', 'English'],
   locale: 'en_IN',
