@@ -210,9 +210,15 @@ const questions = [
               </p>
             </div>
 
-            <!-- unified next step for every score: book a call with Malavika (pay → form) -->
+            <!-- unified next step for every score: book a call with Malavika -->
+            <!-- TODO(client): paid booking flow paused — restore by uncommenting below
+                 and removing the plain CTA further down.
             <div class="mt-7">
               <BookingPlans heading="Book your call with Malavika" intro="Your next step:" />
+            </div>
+            -->
+            <div class="mt-7 text-center">
+              <a href={LINKS.bookSession} class="btn-primary" data-magnetic>Book your call with Malavika</a>
             </div>
 
             <p class="mt-8 border-t border-leaf-100 pt-5 text-center text-sm text-ink-muted">

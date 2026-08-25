@@ -31,12 +31,16 @@ export const SOCIAL = {
  * CTA / external integration URLs.
  * TODO(asset): replace `registrationUrl` with the Google Form link (Phase 2).
  */
+/**
+ * TODO(client): paid 1-2-1 session flow paused — bookingUrl/bookSession point at
+ * /schedule instead of /book. Restore by pointing both back at '/book'.
+ */
 export const LINKS = {
-  bookingUrl: '/book', // all book/schedule CTAs point at the paid-session booking page
+  bookingUrl: '/schedule', // was '/book' — all book/schedule CTAs point at the booking page
   registrationUrl: '/contact', // masterclass registration deferred to Phase 2
   contact: '/contact',
   assessment: '/assessment', // free Mind Detox Scorecard
-  bookSession: '/book', // paid 1-2-1 session booking (pay via UPI → confirm via form)
+  bookSession: '/schedule', // was '/book' — paid 1-2-1 session booking (pay via UPI → confirm via form)
 } as const;
 
 /**

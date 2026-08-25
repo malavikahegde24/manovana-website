@@ -44,14 +44,24 @@ const calLink = SCHEDULING.calLink;
           </span>
           <h2 class="mt-5 font-serif text-2xl text-leaf-900">Book a session directly</h2>
           <p class="prose-soft mx-auto mt-3 max-w-md">
+            Online calendar booking is being set up. In the meantime, reach out directly
+            and Malavika will personally arrange a time with you.
+          </p>
+          <!-- TODO(client): paid 1-2-1 booking flow paused — restore by uncommenting
+               below and removing the two buttons further down.
+          <p class="prose-soft mx-auto mt-3 max-w-md">
             Online calendar booking is being set up. In the meantime, book a paid 1-2-1
             session directly, choose a plan, pay via UPI, and confirm with a quick form.
           </p>
+          -->
           <div class="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <!-- TODO(client): restore paid booking button — was:
             <a href={LINKS.bookSession} class="btn-primary" data-magnetic>Book a session</a>
-            <a href={`mailto:${SITE.email}?subject=Consultation%20request`} class="btn-secondary" data-magnetic>
+            -->
+            <a href={`mailto:${SITE.email}?subject=Consultation%20request`} class="btn-primary" data-magnetic>
               Email Malavika
             </a>
+            <a href="/contact" class="btn-secondary" data-magnetic>Send a message</a>
           </div>
           <p class="mt-5 text-sm text-ink-muted">
             Or <a href="/contact" class="text-leaf-700 underline">send a message</a>, or reach
