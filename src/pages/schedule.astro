@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/sections/PageHeader.astro';
 import Icon from '../components/ui/Icon.astro';
-import { SITE, SOCIAL, SCHEDULING, LINKS } from '../data/site';
+import { SITE, SOCIAL, SCHEDULING, OFFERS } from '../data/site';
 import { breadcrumbJsonLd } from '../lib/seo';
 
 const calLink = SCHEDULING.calLink;
@@ -47,18 +47,11 @@ const calLink = SCHEDULING.calLink;
             Online calendar booking is being set up. In the meantime, reach out directly
             and Malavika will personally arrange a time with you.
           </p>
-          <!-- TODO(client): paid 1-2-1 booking flow paused — restore by uncommenting
-               below and removing the two buttons further down.
-          <p class="prose-soft mx-auto mt-3 max-w-md">
-            Online calendar booking is being set up. In the meantime, book a paid 1-2-1
-            session directly, choose a plan, pay via UPI, and confirm with a quick form.
-          </p>
-          -->
           <div class="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <!-- TODO(client): restore paid booking button — was:
-            <a href={LINKS.bookSession} class="btn-primary" data-magnetic>Book a session</a>
-            -->
-            <a href={`mailto:${SITE.email}?subject=Consultation%20request`} class="btn-primary" data-magnetic>
+            <a href={OFFERS.bookingFormUrl} target="_blank" rel="noopener noreferrer" class="btn-primary" data-magnetic>
+              Register for a session
+            </a>
+            <a href={`mailto:${SITE.email}?subject=Consultation%20request`} class="btn-secondary" data-magnetic>
               Email Malavika
             </a>
             <a href="/contact" class="btn-secondary" data-magnetic>Send a message</a>
