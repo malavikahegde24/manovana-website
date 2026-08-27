@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/sections/PageHeader.astro';
 import Icon from '../components/ui/Icon.astro';
-import { SITE, SOCIAL, SCHEDULING, OFFERS } from '../data/site';
+import { SCHEDULING, OFFERS } from '../data/site';
 import { breadcrumbJsonLd } from '../lib/seo';
 
 const calLink = SCHEDULING.calLink;
@@ -44,25 +44,14 @@ const calLink = SCHEDULING.calLink;
           </span>
           <h2 class="mt-5 font-serif text-2xl text-leaf-900">Book a session directly</h2>
           <p class="prose-soft mx-auto mt-3 max-w-md">
-            Online calendar booking is being set up. In the meantime, reach out directly
-            and Malavika will personally arrange a time with you.
+            Fill in the short booking form and Malavika will personally arrange a time
+            with you.
           </p>
-          <div class="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <div class="mt-7 flex justify-center">
             <a href={OFFERS.bookingFormUrl} target="_blank" rel="noopener noreferrer" class="btn-primary" data-magnetic>
               Register for a session
             </a>
-            <a href={`mailto:${SITE.email}?subject=Consultation%20request`} class="btn-secondary" data-magnetic>
-              Email Malavika
-            </a>
-            <a href="/contact" class="btn-secondary" data-magnetic>Send a message</a>
           </div>
-          <p class="mt-5 text-sm text-ink-muted">
-            Or <a href="/contact" class="text-leaf-700 underline">send a message</a>, or reach
-            out on Instagram, 
-            <a class="text-leaf-700 underline" href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer">
-              {SOCIAL.instagramHandle}
-            </a>
-          </p>
         </div>
       )
     }
