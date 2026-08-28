@@ -6,10 +6,12 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: false
+          
       - name: Push to Client
         run: |
-          git remote add client https://${{ secrets.MY_PAT_FOR_CODE_PUSH }}@github.com/malavikahegde24/manovana-website.git
+          git remote add client https://DSP501:${{ secrets.MY_PAT_FOR_CODE_PUSH }}@github.com/malavikahegde24/manovana-website.git
           git push client master --force
