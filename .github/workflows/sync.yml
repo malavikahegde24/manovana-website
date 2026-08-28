@@ -1,0 +1,15 @@
+name: Sync to Client Repo
+on:
+  push:
+    branches: [ master ]
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Push to Client
+        run: |
+          git remote add client https://${{ secrets.CLIENT_PAT }}@github.com/malavikahegde24/manovana-website.git
+          git push client master --force
