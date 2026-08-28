@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Kill the Netlify Identity widget / drawer entirely — never used on this site */
+#netlify-identity-widget,
+netlify-drawer {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 @layer base {
   :root {
     --sky-top: #cfeafb;
