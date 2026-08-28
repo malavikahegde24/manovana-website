@@ -82,6 +82,17 @@ const showScorecardCta = !['/assessment', '/thank-you', '/contact/success'].incl
     <script is:inline>
       document.documentElement.classList.add('js');
     </script>
+
+    <!-- Keep the Netlify Identity HUD hidden (belt-and-braces with the CSS rule) -->
+    <script is:inline>
+      // Send Netlify's own "hide" command the moment the page loads
+      window.postMessage({ nlHud: 'state', value: 'hidden' }, '*');
+
+      // Send it again slightly delayed just in case Netlify's script loads late
+      setTimeout(() => {
+        window.postMessage({ nlHud: 'state', value: 'hidden' }, '*');
+      }, 1000);
+    </script>
   </head>
   <body>
     <div
